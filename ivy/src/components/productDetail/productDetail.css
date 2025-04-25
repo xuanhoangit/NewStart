@@ -1,0 +1,17 @@
+
+
+
+.product-detail_info {
+    padding-left: 100px;
+}
+.product-detail{
+    display: flex;
+}
+@media (max-width:600px) {
+    .product-detail_info{
+        padding: 0;
+    }
+    .product-detail {
+        display: block;
+    }
+}

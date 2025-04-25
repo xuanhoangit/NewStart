@@ -1,0 +1,39 @@
+
+.center{
+    justify-content: space-evenly;
+    display: flex;
+}
+
+.center a{
+    color: rgba(24, 24, 24, 0.842);
+}
+
+.center >*{
+    /* border: 1px solid; */
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+.center  .title >i{
+    display: none;
+}
+.center .center-content{
+    opacity: 1;
+}
+@media (max-width:600px){
+    .center{
+        flex-direction: column;
+    }
+    .center  .title >i{
+        display: block;
+    }
+    .center .title,.center p{
+        font-size: medium;
+    }
+    .center .center-content{
+        transition:0.2s ease-in-out;
+        opacity: 0;
+        max-height: 0;
+        overflow: hidden;
+    }
+}

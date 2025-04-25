@@ -1,0 +1,93 @@
+
+:root{
+    --margin-bottom: 20px;
+}
+#register form {
+    display: flex;
+}
+#register .customerInfo-form {
+    flex: 1;
+}
+#register .password-form{
+    flex: 1;
+}
+#register h2{
+    text-align: center;
+        padding-top: 20px;
+    /* border: 1px solid; */
+        font-size: 22px !important;
+        color: var(--color-title);
+        font-weight: 550;
+        margin: auto;
+}
+#register h4 {
+    margin-bottom: 10px;
+    font-size: 16px !important;
+    color: var(--color-title);
+    font-weight: 500;
+}
+#register div *{
+    font-size: 14px;
+}
+
+.customerInfo-form > * {
+    margin-bottom:var(--margin-bottom);
+    display: flex;
+    justify-content: space-between;
+}
+.password-form>*{
+    margin-bottom: var(--margin-bottom);
+}
+.customerInfo-form>* div{
+    margin-right: var(--margin-bottom);
+    flex: 1;
+}
+select:focus,textarea:focus{
+    outline: 3px solid var(--color-border);
+}
+select{
+    /* Ẩn mũi tên mặc định */
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: url('../../../assets/images/arrow_down_selection.png') no-repeat ;
+    background-size: 15px;
+    background-position: right 10px center;
+    /* Thêm khoảng trống để mũi tên không đè lên chữ */
+}
+textarea,select{
+    box-sizing: border-box;
+        border-radius: 3px;
+        border: 1px solid var(--color-border);
+}
+
+.button-register button,
+#submit button {
+    margin-top: 20px;
+    padding: 12px 0 !important;
+    max-width: 100%;
+    width: 100%;
+    box-shadow: none !important;
+    border-radius: 10px/10px 0 !important;
+    font-weight: 550;
+    font-size: 14px;
+    color: white !important;
+    background-color: var(--color-title) !important;
+}
+
+#submit button:hover,
+.button-register button:hover {
+    background-color: aliceblue !important;
+    color: black !important;
+}
+@media (max-width:600px){
+    #register form{
+        display: block !important;
+    }
+    .customerInfo-form>*{
+        display: block;
+    }
+    .customerInfo-form>* div{
+        margin-right: 0;
+    }
+}

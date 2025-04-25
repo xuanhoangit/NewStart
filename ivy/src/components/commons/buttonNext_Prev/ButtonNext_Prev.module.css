@@ -1,0 +1,23 @@
+.Prev,.Next{
+    padding: 5px;
+    font-size: 48px;
+    display: block;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index:  1;
+    cursor: "pointer";
+    color: rgba(248, 224, 180, 0.925);
+    transition: 0.3s all;
+  }
+  .Next:hover,.Prev:hover{
+    color: rgba(48, 48, 48, 0.733);
+    -webkit-text-stroke: 2px  rgba(248, 224, 180, 0.925);
+  }
+  .Next{
+    right: 10px;
+  }
+  .Prev{
+    left: 10px;
+  }
+

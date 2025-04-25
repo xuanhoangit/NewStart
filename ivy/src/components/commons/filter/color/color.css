@@ -1,0 +1,43 @@
+
+ .color>div input {
+    visibility: hidden;
+    /* left: -20px; */
+    position: absolute;
+}
+.color>div {
+    position: relative;
+    width: 15px;
+    border-radius: 50%;
+    height: 15px;
+    /* border: 1px solid red; */
+    overflow: hidden;
+}
+
+
+.color >div i {
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: var(--font-size-sm);
+}
+
+.color .white {
+    box-sizing: border-box;
+    border: 1px solid var(--color-title);
+}
+
+.color .white i {
+    color: var(--color-title) !important;
+}
+.list-colors {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.list-colors li{
+    /* border:  1px solid; */
+    margin-right: 20px;
+    margin-bottom: 10px;
+}

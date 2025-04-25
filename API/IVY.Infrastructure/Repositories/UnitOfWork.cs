@@ -1,0 +1,83 @@
+using IVY.Application.Interfaces;
+using IVY.Application.Interfaces.IRepository;
+using IVY.Application.Interfaces.IRepository.Products;
+using IVY.Application.Interfaces.Users;
+using IVY.Infrastructure.Data;
+using IVY.Infrastructure.Repositories;
+using IVY.Infrastructure.Repositories.ProductRepositories;
+using VNPAY.NET;
+
+namespace SneakerAPI.Infrastructure.Repositories;
+public class UnitOfWork : IUnitOfWork
+{   
+    private readonly IVYDbContext _db;
+    // private readonly IConfiguration _config;
+    public UnitOfWork(IVYDbContext db)
+    {
+        _db = db;
+        Vnpay = new Vnpay();
+        GHN = new GHN();
+        ProductColorFile = new ProductColorFileRepository(_db);
+        Product =  new ProductRepository(_db);
+        ProductCollection =  new ProductCollectionRepository(_db);
+        Size =  new SizeRepository(_db);
+        Category =  new CategoryRepository(_db);
+        Color =  new ColorRepository(_db);
+        ProductColor =  new ProductColorRepository(_db);
+        ProductCategory =  new ProductCategoryRepository(_db);
+        
+        
+    }
+    // public ICartItemRepository CartItem {get;}
+    // public IOrderRepository Order {get;}
+
+    // public IOrderItemRepository OrderItem {get;}
+
+    public IProductColorFileRepository ProductColorFile {get;}
+    public IProductRepository Product {get;}
+    public IProductFavoriteRepository ProductFavorite { get; }
+
+    public IProductCollectionRepository ProductCollection { get; }
+
+    public ISizeRepository Size { get; }
+
+    public ICategoryRepository Category {get;}
+
+    public IColorRepository Color {get;}
+
+    public IProductColorRepository ProductColor {get;}
+
+    public IProductCategoryRepository ProductCategory {get;}
+    
+
+
+
+
+
+    public ICustomerRepository Customer {get;}
+
+    // public IStaffInfoRepository StaffInfo {get;}
+
+    // public IAddressRepository Address {get;}
+
+    public IVnpay Vnpay {get;}
+    public IGHN GHN {get;}
+
+
+
+    // public IFavoriteRepository Favorite {get;}
+
+
+
+
+
+
+    // public IOrderRepository Order {get;}
+
+
+    public void Save()
+    {
+        _db.SaveChanges();
+    }
+
+}

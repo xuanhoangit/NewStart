@@ -1,0 +1,109 @@
+:root{
+    --button-width:300px;
+}
+.container-login{
+    /* margin-top: 20px; */
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 20px;
+}
+#login{
+    width: 50%;
+}
+#register-link{
+    border-left: var(--border-bottom);
+    width: 50%;
+}
+#login,#register-link{
+    padding: 0 100px;
+    text-align: center;
+    /* border: 1px solid; */
+    margin-top: 20px;
+}
+#login p,#login .link,#register-link p{
+    font-size: 13px;
+    color: var(--color-title);
+}
+#login .link{
+    margin: 10px 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+#login a{
+    color: var(--color-title);
+    text-decoration: underline;
+}
+#login h3,#register-link h3{
+    margin: 0;
+    color: var(--color-title);
+    font-weight: 550;
+}
+#form-login{
+    display: flex;
+    width: var(--button-width);
+    margin: 30px auto;
+    flex-direction: column;
+}
+#form-login >*{
+    flex:1;
+}
+
+.link-to-register button,#submit button{
+    margin-top: 20px;
+    padding: 12px 0 !important;
+    max-width:100%;
+    width:100%;
+    box-shadow: none !important;
+    border-radius: 20px/15px 0;
+    font-weight: 550;
+    font-size:14px;
+    color: white !important;
+    background-color: var(--color-title) !important;
+}
+#submit button:hover,#register-link button:hover{
+    background-color: aliceblue !important;
+    color: black !important;
+}
+
+#register-link{
+    display: flex;
+    flex-direction: column;
+}
+
+.external-login{
+    height: 40px;
+}
+.external-login img{
+    /* transition: linear 0.2s; */
+    margin:  5px;
+    padding: 5px;
+    border: var(--border-bottom);
+    border-radius: 4px;
+}
+.external-login img:hover{
+    outline: 3px solid var(--color-border);
+}
+@media (max-width:600px){
+    .container-login{
+        padding-top: 10px;
+        display: block;
+        width: 100%;
+    }
+    #login{
+        width: 100%;
+    }
+    #form-login{
+        padding: 0;
+        width: 100% !important;
+    }
+
+    #register-link{
+        border-left:none;
+        width: 100%;
+    }
+    #register-link,#login{
+        padding: 0;
+    }
+}

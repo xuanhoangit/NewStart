@@ -1,0 +1,37 @@
+
+
+.title_table-size{
+    font-size: var(--font-size-biggest-title);
+    color: var(--color-title);
+}
+.container_table-size{
+    padding: 20px;
+}
+.table-mobile{
+    display: none;
+}
+.title-table{
+    border:unset;
+    color: var(--color-title);
+    font-size: 20px;
+    padding: 40px 18px;
+    font-weight: 600;
+    line-height: 30px;
+}
+table {
+    width: 100%;
+    font-size: 16px;
+    border-collapse: separate;
+    text-indent: initial;
+    border-spacing: 2px;
+    border: 1px solid #dedede;
+}
+table td {
+    font-size: 14px;
+    unicode-bidi: isolate;
+    display: table-cell;
+    text-align: left;
+    padding: 16px 24px;
+    border-top: 1px solid #dedede;
+}
+

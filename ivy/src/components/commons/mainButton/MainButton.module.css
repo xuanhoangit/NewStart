@@ -1,0 +1,24 @@
+
+
+/* main button */
+#mainbutton{
+    text-transform: uppercase;
+    font-weight: 550;
+    box-sizing:content-box;
+    cursor: pointer;
+    transition: 0.3s all;
+    box-shadow: 6px 0px 0px -3px white,6px 0px 0px -2px wheat;
+    padding: 12px;
+    min-width: 0;
+    border: 1px solid var(--color-title);
+    border-radius: 25px 0;
+    background-color: white;
+    color: var(--color-title);
+    font-size: 14px;
+    letter-spacing: 0.5px;
+}
+#mainbutton:hover{
+  box-shadow: none;
+  background-color: rgba(0, 0, 0, 0.842);
+  color: white;
+}

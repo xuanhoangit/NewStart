@@ -1,0 +1,46 @@
+.product{
+    position: relative !important;
+    width: 100%;
+}
+
+.cnf{
+    padding: 15px 0;
+    margin-bottom: 10px;
+}
+.favorite{
+    float: right;
+    margin-right: 5px;
+    cursor: pointer;
+}
+.productName{
+    font-size: 13px;
+    font-weight: 400;
+    height: 45px;
+    margin:  0 !important;
+    width: 100%;
+    display: -webkit-box;              /* Sử dụng Flexbox để giới hạn dòng */
+    -webkit-box-orient: vertical;      /* Thiết lập chiều dọc */
+    overflow: hidden;                  /* Ẩn phần vượt ra ngoài */
+    text-overflow: ellipsis;           /* Thêm dấu ba chấm */
+    -webkit-line-clamp: 2;             /* Giới hạn xuống dòng tối đa 2 lần */
+    line-clamp: 2;                     /* Hỗ trợ cho các trình duyệt khác */
+}
+.salef{
+    height: 40px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    /* align-items: center; */
+}
+.productPrice{
+    display: flex;
+    align-items: center;
+}
+.productPrice .sale{
+    margin-right: 5px;
+    font-weight: 550;
+}
+.productPrice .originPrice{
+    font-weight: 300;
+    font-size: 10px;
+}

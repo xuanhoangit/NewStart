@@ -1,0 +1,274 @@
+{
+  "format": 1,
+  "restore": {
+    "D:\\Download\\NewStart\\API\\IVYCustomer.API\\IVYCustomer.API.csproj": {}
+  },
+  "projects": {
+    "D:\\Download\\NewStart\\API\\IVY.Application\\IVY.Application.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Download\\NewStart\\API\\IVY.Application\\IVY.Application.csproj",
+        "projectName": "IVY.Application",
+        "projectPath": "D:\\Download\\NewStart\\API\\IVY.Application\\IVY.Application.csproj",
+        "packagesPath": "C:\\Users\\WelCome To BVCN02\\.nuget\\packages\\",
+        "outputPath": "D:\\Download\\NewStart\\API\\IVY.Application\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\WelCome To BVCN02\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "D:\\Download\\NewStart\\API\\IVY.Domain\\IVY.Domain.csproj": {
+                "projectPath": "D:\\Download\\NewStart\\API\\IVY.Domain\\IVY.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.404/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Download\\NewStart\\API\\IVY.Domain\\IVY.Domain.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Download\\NewStart\\API\\IVY.Domain\\IVY.Domain.csproj",
+        "projectName": "IVY.Domain",
+        "projectPath": "D:\\Download\\NewStart\\API\\IVY.Domain\\IVY.Domain.csproj",
+        "packagesPath": "C:\\Users\\WelCome To BVCN02\\.nuget\\packages\\",
+        "outputPath": "D:\\Download\\NewStart\\API\\IVY.Domain\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\WelCome To BVCN02\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.404/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Download\\NewStart\\API\\IVY.Infrastructure\\IVY.Infrastructure.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Download\\NewStart\\API\\IVY.Infrastructure\\IVY.Infrastructure.csproj",
+        "projectName": "IVY.Infrastructure",
+        "projectPath": "D:\\Download\\NewStart\\API\\IVY.Infrastructure\\IVY.Infrastructure.csproj",
+        "packagesPath": "C:\\Users\\WelCome To BVCN02\\.nuget\\packages\\",
+        "outputPath": "D:\\Download\\NewStart\\API\\IVY.Infrastructure\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\WelCome To BVCN02\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "D:\\Download\\NewStart\\API\\IVY.Application\\IVY.Application.csproj": {
+                "projectPath": "D:\\Download\\NewStart\\API\\IVY.Application\\IVY.Application.csproj"
+              },
+              "D:\\Download\\NewStart\\API\\IVY.Domain\\IVY.Domain.csproj": {
+                "projectPath": "D:\\Download\\NewStart\\API\\IVY.Domain\\IVY.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.404/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Download\\NewStart\\API\\IVYCustomer.API\\IVYCustomer.API.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Download\\NewStart\\API\\IVYCustomer.API\\IVYCustomer.API.csproj",
+        "projectName": "IVYCustomer.API",
+        "projectPath": "D:\\Download\\NewStart\\API\\IVYCustomer.API\\IVYCustomer.API.csproj",
+        "packagesPath": "C:\\Users\\WelCome To BVCN02\\.nuget\\packages\\",
+        "outputPath": "D:\\Download\\NewStart\\API\\IVYCustomer.API\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\WelCome To BVCN02\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "D:\\Download\\NewStart\\API\\IVY.Application\\IVY.Application.csproj": {
+                "projectPath": "D:\\Download\\NewStart\\API\\IVY.Application\\IVY.Application.csproj"
+              },
+              "D:\\Download\\NewStart\\API\\IVY.Domain\\IVY.Domain.csproj": {
+                "projectPath": "D:\\Download\\NewStart\\API\\IVY.Domain\\IVY.Domain.csproj"
+              },
+              "D:\\Download\\NewStart\\API\\IVY.Infrastructure\\IVY.Infrastructure.csproj": {
+                "projectPath": "D:\\Download\\NewStart\\API\\IVY.Infrastructure\\IVY.Infrastructure.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.OpenApi": {
+              "target": "Package",
+              "version": "[8.0.11, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[6.6.2, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.404/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

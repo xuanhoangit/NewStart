@@ -1,0 +1,30 @@
+.copyRight{
+    text-align: center;
+    border-top: var(--border-bottom);
+    height: 70px;
+    position: relative;
+}
+.copyRight .content{
+    left: 50%;
+    position: absolute;
+    top:50%;
+    font-size: 14px;
+    color: rgba(51, 51, 51, 0.911);
+    transform: translate(-50%,-50%);
+}
+.paddingForActionSM{
+    display: none;
+}
+@media (max-width:600px){
+    .copyRight{
+        margin-top: 30px;
+        height: 70px;
+    }
+    .copyRight .content{
+        font-size: 11px;
+    }
+    .paddingForActionSM{
+        display: block;
+        height: 70px;
+    }
+}

@@ -1,0 +1,10 @@
+.lazy-load-component {
+    opacity: 0 !important;
+    transform: translateY(20px) !important;
+}
+
+.lazy-load-component.visible {
+transition: opacity 0.7s ease, transform 0.7s ease !important;
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}

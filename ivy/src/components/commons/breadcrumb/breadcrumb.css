@@ -1,0 +1,9 @@
+.breadcrumb-products {
+    padding: 15px 0;
+}
+
+.breadcrumb-products a {
+    font-size: 13px;
+    color: var(--color-title) !important;
+    font-weight: 400;
+}

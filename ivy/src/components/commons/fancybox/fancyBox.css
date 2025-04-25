@@ -1,0 +1,59 @@
+
+/* Nút để mở FancyBox */
+.open-fancybox-btn {
+    max-width: fit-content;
+    color: var(--color-title);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: var(--font-size-sm);
+}
+
+/* Overlay che toàn bộ trang */
+.fancybox-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    /* Căn lên đầu trang khi nội dung cuộn */
+    z-index: 1000 !important;
+    overflow-y: auto;
+        padding: 0 20px;
+    /* Cho phép cuộn trang */
+}
+
+.fancybox {
+    position: relative;
+    width: 100%;
+    margin: 0 150px;
+    /* Tạo khoảng cách phía trên để FancyBox không dính vào cạnh trên */
+    padding: 20px;
+    background-color: #fff;
+    /* border-radius: 10px; */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+.fancybox>:first-child{
+    position: absolute;
+    right: 5px;
+    border: var(--border-bottom);
+    top:5px;
+    height: 30px;
+    width: 30px;
+    text-align: center;
+    align-content: center;
+    font-size: large;
+}
+.fancybox>:first-child:hover{
+    background-color: rgb(255, 68, 68);
+    color: white;
+}
+.fancybox p {
+    font-size: 16px;
+    color: #333;
+}

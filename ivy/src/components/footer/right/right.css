@@ -1,0 +1,55 @@
+
+.right #formSubcribe{
+    display: flex;
+}
+.right #formSubcribe .btn-submit{
+    /* flex: 1; */
+    text-align: end;
+}
+.right .register-contact{
+    margin-bottom: 30px;
+    padding: 15px;
+    border:5px solid #cccccc77;
+    border-radius: 50px 0 ;
+}
+.right .register-contact #emailSubcribe{
+    border: none;
+    outline: none;
+    padding: 12px 0;
+    flex:1;
+    border-bottom:1px solid rgba(131, 131, 131, 0.363);
+}
+.right .register-contact #emailSubcribe::placeholder{
+    padding-bottom:5px 0;
+    color: rgba(73, 73, 73, 0.774);
+}
+
+.right .title{
+    margin-bottom: 20px;
+    font-size: 20px;
+    font-weight: 520;
+}
+@media (max-width:600px){
+    .right .register-contact{
+        border-radius: 25px 0;
+    }
+    .right #formSubcribe{
+        /* border: 1px solid; */
+        width: 100%;
+        margin-top: 10px;
+    }
+    .right #emailSubcribe{
+        /* width: 100%; */
+        flex: 1;
+    }
+    .right .linkDownload ul{
+        display: flex;
+    }
+    .right .linkDownload ul img{
+        max-height: 40px;
+        margin-right: 20px;
+    }
+    .right .title,.right p{
+        font-size: medium;
+    }
+}

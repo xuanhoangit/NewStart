@@ -1,0 +1,6 @@
+@IVYDashboard.API_HostAddress = http://localhost:5189
+
+GET {{IVYDashboard.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

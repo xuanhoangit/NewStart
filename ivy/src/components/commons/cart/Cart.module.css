@@ -1,0 +1,52 @@
+.addToCart{
+    right: 1px;
+    transition: 0.3s all;
+    border-radius: 10px 0;
+    height: 30px;
+    width: 40px;
+    background-color: rgba(29, 29, 29, 0.973);
+    color: white;
+    position: relative;
+    box-sizing: border-box;
+}
+.addToCart:hover{
+    background-color: white;
+    border: 1px solid rgba(29, 29, 29, 0.973);
+    color: rgba(29, 29, 29, 0.973);
+}
+.addToCart div{
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+}
+
+.listsSize{ 
+ 
+  border: 1px solid rgb(231, 231, 231);
+  position: absolute;
+  display: block;
+  left: 0px;
+  bottom: 10px;
+  background-color: white;
+  max-width: 0px;
+  width: 0;
+  opacity: 0;
+  overflow: hidden;
+}
+.listsSize.open{
+  transition: max-width 0.3s ease-in-out,opacity 0.5s ease-out;
+  opacity: 1;
+  width: 100px;
+  max-width: 500px;
+}
+.listsSize li p{
+  line-height: 2;
+  padding:0 5px;
+  text-align: center;
+  font-size: 14px !important;
+}
+.listsSize li a{
+  font-weight: 550;
+  color: rgba(29, 29, 29, 0.973);
+}

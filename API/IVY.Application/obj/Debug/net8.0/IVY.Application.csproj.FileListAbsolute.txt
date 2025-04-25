@@ -1,0 +1,15 @@
+D:\Download\NewStart\API\IVY.Application\bin\Debug\net8.0\IVY.Application.deps.json
+D:\Download\NewStart\API\IVY.Application\bin\Debug\net8.0\IVY.Application.dll
+D:\Download\NewStart\API\IVY.Application\bin\Debug\net8.0\IVY.Application.pdb
+D:\Download\NewStart\API\IVY.Application\bin\Debug\net8.0\IVY.Domain.dll
+D:\Download\NewStart\API\IVY.Application\bin\Debug\net8.0\IVY.Domain.pdb
+D:\Download\NewStart\API\IVY.Application\obj\Debug\net8.0\IVY.Application.csproj.AssemblyReference.cache
+D:\Download\NewStart\API\IVY.Application\obj\Debug\net8.0\IVY.Application.GeneratedMSBuildEditorConfig.editorconfig
+D:\Download\NewStart\API\IVY.Application\obj\Debug\net8.0\IVY.Application.AssemblyInfoInputs.cache
+D:\Download\NewStart\API\IVY.Application\obj\Debug\net8.0\IVY.Application.AssemblyInfo.cs
+D:\Download\NewStart\API\IVY.Application\obj\Debug\net8.0\IVY.Application.csproj.CoreCompileInputs.cache
+D:\Download\NewStart\API\IVY.Application\obj\Debug\net8.0\IVY.Appl.5E9689A3.Up2Date
+D:\Download\NewStart\API\IVY.Application\obj\Debug\net8.0\IVY.Application.dll
+D:\Download\NewStart\API\IVY.Application\obj\Debug\net8.0\refint\IVY.Application.dll
+D:\Download\NewStart\API\IVY.Application\obj\Debug\net8.0\IVY.Application.pdb
+D:\Download\NewStart\API\IVY.Application\obj\Debug\net8.0\ref\IVY.Application.dll

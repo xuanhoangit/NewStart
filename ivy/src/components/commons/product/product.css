@@ -1,0 +1,16 @@
+
+.productImage  img{
+    transition: 0.3s all!important ;
+    width: 100%!important;
+}
+.productImage  .hoverImg{
+    opacity: 0.2!important;
+    visibility: hidden!important;
+    left: 0!important;
+    top: 0 !important;
+    position: absolute!important;
+}
+.productImage:hover .hoverImg{
+    opacity: 1!important;
+    visibility: visible!important;
+}
