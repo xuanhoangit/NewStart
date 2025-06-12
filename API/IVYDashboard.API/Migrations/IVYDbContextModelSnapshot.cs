@@ -22,7 +22,7 @@ namespace IVYDashboard.API.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("IVY.Domain.Models.Category", b =>
+            modelBuilder.Entity("IVY.Domain.Models.Products.Category", b =>
                 {
                     b.Property<int>("Category__Id")
                         .ValueGeneratedOnAdd()
@@ -34,12 +34,18 @@ namespace IVYDashboard.API.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("Category__Status")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Category__Type")
+                        .HasColumnType("int");
+
                     b.HasKey("Category__Id");
 
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("IVY.Domain.Models.Collection", b =>
+            modelBuilder.Entity("IVY.Domain.Models.Products.Collection", b =>
                 {
                     b.Property<int>("Collection__Id")
                         .ValueGeneratedOnAdd()
@@ -58,13 +64,16 @@ namespace IVYDashboard.API.Migrations
                     b.ToTable("Collections");
                 });
 
-            modelBuilder.Entity("IVY.Domain.Models.Color", b =>
+            modelBuilder.Entity("IVY.Domain.Models.Products.Color", b =>
                 {
                     b.Property<int>("Color__Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Color__Id"));
+
+                    b.Property<string>("Color__Image")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Color__Name")
                         .HasColumnType("nvarchar(max)");
@@ -74,7 +83,30 @@ namespace IVYDashboard.API.Migrations
                     b.ToTable("Colors");
                 });
 
-            modelBuilder.Entity("IVY.Domain.Models.Product", b =>
+            modelBuilder.Entity("IVY.Domain.Models.Products.ColorSubColor", b =>
+                {
+                    b.Property<int>("ColorSubColor__Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ColorSubColor__Id"));
+
+                    b.Property<int>("ColorSubColor__ColorId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ColorSubColor__SubColorId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ColorSubColor__Id");
+
+                    b.HasIndex("ColorSubColor__ColorId");
+
+                    b.HasIndex("ColorSubColor__SubColorId");
+
+                    b.ToTable("ColorSubColors");
+                });
+
+            modelBuilder.Entity("IVY.Domain.Models.Products.Product", b =>
                 {
                     b.Property<int>("Product__Id")
                         .ValueGeneratedOnAdd()
@@ -106,36 +138,7 @@ namespace IVYDashboard.API.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("IVY.Domain.Models.ProductCategory", b =>
-                {
-                    b.Property<int>("ProductCategory__Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductCategory__Id"));
-
-                    b.Property<int>("ProductCategory__CategoryId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("ProductCategory__IsEvent")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("ProductCategory__ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProductCategory__Status")
-                        .HasColumnType("int");
-
-                    b.HasKey("ProductCategory__Id");
-
-                    b.HasIndex("ProductCategory__CategoryId");
-
-                    b.HasIndex("ProductCategory__ProductId");
-
-                    b.ToTable("ProductCategories");
-                });
-
-            modelBuilder.Entity("IVY.Domain.Models.ProductCollection", b =>
+            modelBuilder.Entity("IVY.Domain.Models.Products.ProductCollection", b =>
                 {
                     b.Property<int>("ProductCollection__Id")
                         .ValueGeneratedOnAdd()
@@ -158,74 +161,7 @@ namespace IVYDashboard.API.Migrations
                     b.ToTable("ProductCollections");
                 });
 
-            modelBuilder.Entity("IVY.Domain.Models.ProductColor", b =>
-                {
-                    b.Property<int>("ProductColor__Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductColor__Id"));
-
-                    b.Property<int>("ProductColor__ColorId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("ProductColor__CreateAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<byte>("ProductColor__Discount")
-                        .HasColumnType("tinyint");
-
-                    b.Property<decimal>("ProductColor__FactoryGatePrice")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("ProductColor__Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("ProductColor__Price")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("ProductColor__ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<byte>("ProductColor__Status")
-                        .HasColumnType("tinyint");
-
-                    b.Property<DateTime>("ProductColor__UpdateAt")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("ProductColor__Id");
-
-                    b.HasIndex("ProductColor__ColorId");
-
-                    b.HasIndex("ProductColor__ProductId");
-
-                    b.ToTable("ProductColor");
-                });
-
-            modelBuilder.Entity("IVY.Domain.Models.ProductColorFile", b =>
-                {
-                    b.Property<int>("ProductFile__Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductFile__Id"));
-
-                    b.Property<int>("ProductColor__Id")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ProductFile__Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ProductFile__Id");
-
-                    b.HasIndex("ProductColor__Id");
-
-                    b.ToTable("ProductColorFiles");
-                });
-
-            modelBuilder.Entity("IVY.Domain.Models.ProductFavorite", b =>
+            modelBuilder.Entity("IVY.Domain.Models.Products.ProductFavorite", b =>
                 {
                     b.Property<int>("ProductFavorite__Id")
                         .ValueGeneratedOnAdd()
@@ -243,7 +179,100 @@ namespace IVYDashboard.API.Migrations
                     b.ToTable("ProductFavorites");
                 });
 
-            modelBuilder.Entity("IVY.Domain.Models.Size", b =>
+            modelBuilder.Entity("IVY.Domain.Models.Products.ProductSubCategory", b =>
+                {
+                    b.Property<int>("ProductSubCategory__Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductSubCategory__Id"));
+
+                    b.Property<int>("ProductSubCategory__ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductSubCategory__SubCategoryId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ProductSubCategory__Id");
+
+                    b.HasIndex("ProductSubCategory__ProductId");
+
+                    b.HasIndex("ProductSubCategory__SubCategoryId");
+
+                    b.ToTable("ProductSubCategories");
+                });
+
+            modelBuilder.Entity("IVY.Domain.Models.Products.ProductSubColor", b =>
+                {
+                    b.Property<int>("ProductSubColor__Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductSubColor__Id"));
+
+                    b.Property<DateTime>("ProductSubColor__CreateAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<byte>("ProductSubColor__Discount")
+                        .HasColumnType("tinyint");
+
+                    b.Property<string>("ProductSubColor__OutfitKey")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<decimal>("ProductSubColor__Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("ProductSubColor__ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<byte>("ProductSubColor__Status")
+                        .HasColumnType("tinyint");
+
+                    b.Property<int>("ProductSubColor__SubColorId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("ProductSubColor__UpdateAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("ProductSubColor__Id");
+
+                    b.HasIndex("ProductSubColor__OutfitKey")
+                        .IsUnique();
+
+                    b.HasIndex("ProductSubColor__ProductId");
+
+                    b.HasIndex("ProductSubColor__SubColorId");
+
+                    b.ToTable("ProductSubColors");
+                });
+
+            modelBuilder.Entity("IVY.Domain.Models.Products.ProductSubColorFile", b =>
+                {
+                    b.Property<int>("ProductSubColorFile__Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductSubColorFile__Id"));
+
+                    b.Property<byte>("ProductSubColorFile__Index")
+                        .HasColumnType("tinyint");
+
+                    b.Property<string>("ProductSubColorFile__Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ProductSubColorFile__ProductSubColorId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ProductSubColorFile__Id");
+
+                    b.HasIndex("ProductSubColorFile__ProductSubColorId");
+
+                    b.ToTable("ProductSubColorFiles");
+                });
+
+            modelBuilder.Entity("IVY.Domain.Models.Products.Size", b =>
                 {
                     b.Property<int>("Size__Id")
                         .ValueGeneratedOnAdd()
@@ -251,32 +280,79 @@ namespace IVYDashboard.API.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Size__Id"));
 
-                    b.Property<int?>("ProductColor__Id")
+                    b.Property<int?>("Size__L")
                         .HasColumnType("int");
 
-                    b.Property<int>("Size__L")
+                    b.Property<int?>("Size__M")
                         .HasColumnType("int");
 
-                    b.Property<int>("Size__M")
+                    b.Property<int>("Size__ProductSubColorId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Size__ProductColorId")
+                    b.Property<int?>("Size__S")
                         .HasColumnType("int");
 
-                    b.Property<int>("Size__S")
+                    b.Property<int?>("Size__XL")
                         .HasColumnType("int");
 
-                    b.Property<int>("Size__XL")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Size__XXl")
+                    b.Property<int?>("Size__XXl")
                         .HasColumnType("int");
 
                     b.HasKey("Size__Id");
 
-                    b.HasIndex("ProductColor__Id");
+                    b.HasIndex("Size__ProductSubColorId")
+                        .IsUnique();
 
                     b.ToTable("Sizes");
+                });
+
+            modelBuilder.Entity("IVY.Domain.Models.Products.SubCategory", b =>
+                {
+                    b.Property<int>("SubCategory__Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SubCategory__Id"));
+
+                    b.Property<int>("SubCategory__CategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SubCategory__Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SubCategory__Status")
+                        .HasColumnType("int");
+
+                    b.HasKey("SubCategory__Id");
+
+                    b.HasIndex("SubCategory__CategoryId");
+
+                    b.ToTable("SubCategories");
+                });
+
+            modelBuilder.Entity("IVY.Domain.Models.Products.SubColor", b =>
+                {
+                    b.Property<int>("SubColor__Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SubColor__Id"));
+
+                    b.Property<string>("SubColor__Image")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SubColor__Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte>("SubColor__Status")
+                        .HasColumnType("tinyint");
+
+                    b.HasKey("SubColor__Id");
+
+                    b.ToTable("SubColors");
                 });
 
             modelBuilder.Entity("IVY.Domain.Models.Users.Customer", b =>
@@ -536,34 +612,34 @@ namespace IVYDashboard.API.Migrations
                     b.ToTable("UserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("IVY.Domain.Models.ProductCategory", b =>
+            modelBuilder.Entity("IVY.Domain.Models.Products.ColorSubColor", b =>
                 {
-                    b.HasOne("IVY.Domain.Models.Category", "Category")
-                        .WithMany("Products")
-                        .HasForeignKey("ProductCategory__CategoryId")
+                    b.HasOne("IVY.Domain.Models.Products.Color", "Color")
+                        .WithMany("ColorSubColors")
+                        .HasForeignKey("ColorSubColor__ColorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("IVY.Domain.Models.Product", "Product")
-                        .WithMany("ProductColors")
-                        .HasForeignKey("ProductCategory__ProductId")
+                    b.HasOne("IVY.Domain.Models.Products.SubColor", "SubColor")
+                        .WithMany("ColorSubColors")
+                        .HasForeignKey("ColorSubColor__SubColorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Category");
+                    b.Navigation("Color");
 
-                    b.Navigation("Product");
+                    b.Navigation("SubColor");
                 });
 
-            modelBuilder.Entity("IVY.Domain.Models.ProductCollection", b =>
+            modelBuilder.Entity("IVY.Domain.Models.Products.ProductCollection", b =>
                 {
-                    b.HasOne("IVY.Domain.Models.Collection", "Collection")
+                    b.HasOne("IVY.Domain.Models.Products.Collection", "Collection")
                         .WithMany("ProductCollections")
                         .HasForeignKey("ProductCollection__CollectionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("IVY.Domain.Models.Product", "Product")
+                    b.HasOne("IVY.Domain.Models.Products.Product", "Product")
                         .WithMany("ProductCollections")
                         .HasForeignKey("ProductCollection__ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -574,39 +650,9 @@ namespace IVYDashboard.API.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("IVY.Domain.Models.ProductColor", b =>
+            modelBuilder.Entity("IVY.Domain.Models.Products.ProductFavorite", b =>
                 {
-                    b.HasOne("IVY.Domain.Models.Color", "Color")
-                        .WithMany("ProductColors")
-                        .HasForeignKey("ProductColor__ColorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("IVY.Domain.Models.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductColor__ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Color");
-
-                    b.Navigation("Product");
-                });
-
-            modelBuilder.Entity("IVY.Domain.Models.ProductColorFile", b =>
-                {
-                    b.HasOne("IVY.Domain.Models.ProductColor", "ProductColor")
-                        .WithMany()
-                        .HasForeignKey("ProductColor__Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ProductColor");
-                });
-
-            modelBuilder.Entity("IVY.Domain.Models.ProductFavorite", b =>
-                {
-                    b.HasOne("IVY.Domain.Models.Product", "Product")
+                    b.HasOne("IVY.Domain.Models.Products.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductFavorite__ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -615,13 +661,75 @@ namespace IVYDashboard.API.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("IVY.Domain.Models.Size", b =>
+            modelBuilder.Entity("IVY.Domain.Models.Products.ProductSubCategory", b =>
                 {
-                    b.HasOne("IVY.Domain.Models.ProductColor", "ProductColor")
-                        .WithMany()
-                        .HasForeignKey("ProductColor__Id");
+                    b.HasOne("IVY.Domain.Models.Products.Product", "Product")
+                        .WithMany("ProductSubCategories")
+                        .HasForeignKey("ProductSubCategory__ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("ProductColor");
+                    b.HasOne("IVY.Domain.Models.Products.SubCategory", "SubCategory")
+                        .WithMany("ProductSubCategories")
+                        .HasForeignKey("ProductSubCategory__SubCategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+
+                    b.Navigation("SubCategory");
+                });
+
+            modelBuilder.Entity("IVY.Domain.Models.Products.ProductSubColor", b =>
+                {
+                    b.HasOne("IVY.Domain.Models.Products.Product", "Product")
+                        .WithMany("ProductSubColors")
+                        .HasForeignKey("ProductSubColor__ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("IVY.Domain.Models.Products.SubColor", "SubColor")
+                        .WithMany("ProductSubColors")
+                        .HasForeignKey("ProductSubColor__SubColorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+
+                    b.Navigation("SubColor");
+                });
+
+            modelBuilder.Entity("IVY.Domain.Models.Products.ProductSubColorFile", b =>
+                {
+                    b.HasOne("IVY.Domain.Models.Products.ProductSubColor", "ProductSubColor")
+                        .WithMany("ProductSubColorFile")
+                        .HasForeignKey("ProductSubColorFile__ProductSubColorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ProductSubColor");
+                });
+
+            modelBuilder.Entity("IVY.Domain.Models.Products.Size", b =>
+                {
+                    b.HasOne("IVY.Domain.Models.Products.ProductSubColor", "ProductSubColor")
+                        .WithOne("Size")
+                        .HasForeignKey("IVY.Domain.Models.Products.Size", "Size__ProductSubColorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ProductSubColor");
+                });
+
+            modelBuilder.Entity("IVY.Domain.Models.Products.SubCategory", b =>
+                {
+                    b.HasOne("IVY.Domain.Models.Products.Category", "Category")
+                        .WithMany("SubCategories")
+                        .HasForeignKey("SubCategory__CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
@@ -675,26 +783,47 @@ namespace IVYDashboard.API.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("IVY.Domain.Models.Category", b =>
+            modelBuilder.Entity("IVY.Domain.Models.Products.Category", b =>
                 {
-                    b.Navigation("Products");
+                    b.Navigation("SubCategories");
                 });
 
-            modelBuilder.Entity("IVY.Domain.Models.Collection", b =>
+            modelBuilder.Entity("IVY.Domain.Models.Products.Collection", b =>
                 {
                     b.Navigation("ProductCollections");
                 });
 
-            modelBuilder.Entity("IVY.Domain.Models.Color", b =>
+            modelBuilder.Entity("IVY.Domain.Models.Products.Color", b =>
                 {
-                    b.Navigation("ProductColors");
+                    b.Navigation("ColorSubColors");
                 });
 
-            modelBuilder.Entity("IVY.Domain.Models.Product", b =>
+            modelBuilder.Entity("IVY.Domain.Models.Products.Product", b =>
                 {
                     b.Navigation("ProductCollections");
 
-                    b.Navigation("ProductColors");
+                    b.Navigation("ProductSubCategories");
+
+                    b.Navigation("ProductSubColors");
+                });
+
+            modelBuilder.Entity("IVY.Domain.Models.Products.ProductSubColor", b =>
+                {
+                    b.Navigation("ProductSubColorFile");
+
+                    b.Navigation("Size");
+                });
+
+            modelBuilder.Entity("IVY.Domain.Models.Products.SubCategory", b =>
+                {
+                    b.Navigation("ProductSubCategories");
+                });
+
+            modelBuilder.Entity("IVY.Domain.Models.Products.SubColor", b =>
+                {
+                    b.Navigation("ColorSubColors");
+
+                    b.Navigation("ProductSubColors");
                 });
 #pragma warning restore 612, 618
         }

@@ -8,7 +8,6 @@
     ".NETCoreApp,Version=v8.0": {
       "IVYDashboard.API/1.0.0": {
         "dependencies": {
-          "AutoMapper.Extensions.Microsoft.DependencyInjection": "12.0.1",
           "DotNetEnv": "3.1.1",
           "Google.Apis.Auth.AspNetCore3": "1.69.0",
           "IVY.Application": "1.0.0",
@@ -82,6 +81,19 @@
           "lib/netstandard2.0/Azure.Identity.dll": {
             "assemblyVersion": "1.11.4.0",
             "fileVersion": "1.1100.424.31005"
+          }
+        }
+      },
+      "CloudinaryDotNet/1.27.5": {
+        "dependencies": {
+          "Newtonsoft.Json": "13.0.3",
+          "System.Net.Http": "4.3.4",
+          "System.Text.RegularExpressions": "4.3.1"
+        },
+        "runtime": {
+          "lib/netstandard2.0/CloudinaryDotNet.dll": {
+            "assemblyVersion": "1.27.5.0",
+            "fileVersion": "1.27.5.0"
           }
         }
       },
@@ -2011,6 +2023,8 @@
       },
       "IVY.Application/1.0.0": {
         "dependencies": {
+          "AutoMapper.Extensions.Microsoft.DependencyInjection": "12.0.1",
+          "CloudinaryDotNet": "1.27.5",
           "IVY.Domain": "1.0.0",
           "Microsoft.AspNetCore.Http": "2.3.0"
         },
@@ -2036,6 +2050,7 @@
       },
       "IVY.Infrastructure/1.0.0": {
         "dependencies": {
+          "AutoMapper.Extensions.Microsoft.DependencyInjection": "12.0.1",
           "IVY.Application": "1.0.0",
           "IVY.Domain": "1.0.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "8.0.4",
@@ -2086,6 +2101,13 @@
       "sha512": "sha512-Sf4BoE6Q3jTgFkgBkx7qztYOFELBCo+wQgpYDwal/qJ1unBH73ywPztIJKXBXORRzAeNijsuxhk94h0TIMvfYg==",
       "path": "azure.identity/1.11.4",
       "hashPath": "azure.identity.1.11.4.nupkg.sha512"
+    },
+    "CloudinaryDotNet/1.27.5": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-wYq4VGuy6o49XMG97jITrXM//4a60Lf5WzuvDcn7tpPrkYJMnaRuAl1xA9CsHlKzxOD1MYRmUYxQGSbcEG1TMQ==",
+      "path": "cloudinarydotnet/1.27.5",
+      "hashPath": "cloudinarydotnet.1.27.5.nupkg.sha512"
     },
     "DotNetEnv/3.1.1": {
       "type": "package",

@@ -1,0 +1,198 @@
+
+
+
+namespace IVY.Domain.Models.Products
+{   
+
+    public class Category
+    {   
+        [Key]
+        public int Category__Id { get; set; }
+        public required string Category__Name { get; set; }
+        public required int Category__Type { get; set; }
+        public required int Category__Status { get; set; }
+        public virtual ICollection<SubCategory>? SubCategories { get; set; }
+    }
+}
+
+
+using IVY.Domain.Enums;
+
+namespace IVY.Domain.Models.Products
+{   
+
+    public class Collection
+    {   
+        [Key]
+        public int Collection__Id { get; set; }
+        public int Collection__Status { get; set; } = (int)ProductStatus.Releasing;
+        public required string? Collection__Name { get; set; }
+        public virtual ICollection<ProductCollection>? ProductCollections { get; set; }
+    }
+}
+
+
+
+public class Color
+{   
+    [Key]
+    public int Color__Id { get; set; }
+    public required string? Color__Name { get; set; }
+    public required string? Color__Image { get; set; }
+    public virtual ICollection<ColorSubColor>? ColorSubColors { get; set; }
+}
+
+
+
+
+public class ColorSubColor
+{   
+    [Key]
+    public int ColorSubColor__Id { get; set; }
+    public int ColorSubColor__SubColorId { get; set; }
+    [ForeignKey("ColorSubColor__SubColorId")]
+    public SubColor? SubColor { get; set; }
+    public int ColorSubColor__ColorId { get; set; }
+    [ForeignKey("ColorSubColor__ColorId")]
+    public Color? Color { get; set; }
+}
+
+
+using IVY.Domain.Enums;
+
+namespace IVY.Domain.Models.Products
+{   
+    public class Product
+    {   
+        [Key]
+        public int Product__Id { get; set; }
+        public required string Product__Name { get; set; }
+        public int Product__Sold { get; set; }=0;
+        public required byte Product__Status { get; set; }=(int)ProductStatus.Releasing;
+        public required byte Product__SeasonId { get; set; }
+        public DateTime Product__CreateAt { get; set; }=DateTime.UtcNow;
+        public DateTime Product__UpdateAt { get; set; }
+        public virtual ICollection<ProductSubColor>? ProductSubColors{ get; set; }
+        public virtual ICollection<ProductCollection>? ProductCollections{ get; set; }
+        public virtual ICollection<ProductSubCategory>? ProductSubCategories { get; set; }
+ 
+    }
+}
+
+
+
+
+
+public class ProductCollection
+{
+    [Key]
+    public int ProductCollection__Id { get; set; }
+    public required int ProductCollection__ProductId { get; set; }
+    [ForeignKey("ProductCollection__ProductId")]
+    public Product? Product { get; set; }
+    public required  int ProductCollection__CollectionId { get; set; }
+     [ForeignKey("ProductCollection__CollectionId")]
+    public Collection? Collection { get; set; }
+}
+
+
+
+
+
+public class ProductSubCategory
+{
+    [Key]
+    public int ProductSubCategory__Id { get; set; }
+    public required  int ProductSubCategory__ProductId { get; set; }
+    [ForeignKey("ProductSubCategory__ProductId")]
+    public Product? Product { get; set; }
+
+    public  int ProductSubCategory__SubCategoryId { get; set; }
+     [ForeignKey("ProductSubCategory__SubCategoryId")]
+    public SubCategory? SubCategory { get; set; }
+}
+
+
+using IVY.Domain.Enums;
+
+
+
+
+public class ProductSubColor
+{
+    [Key]
+    public int ProductSubColor__Id { get; set; }
+    public required decimal ProductSubColor__Price { get; set; }
+
+    public required byte ProductSubColor__Discount { get; set; }
+    public DateTime ProductSubColor__CreateAt { get; set; } = DateTime.UtcNow;
+    public DateTime ProductSubColor__UpdateAt { get; set; }
+    public required byte ProductSubColor__Status { get; set; } = (int)ProductStatus.Releasing;
+    public required int ProductSubColor__SubColorId { get; set; }
+    [ForeignKey("ProductSubColor__SubColorId")]
+    public virtual SubColor? SubColor { get; set; }
+    public required int ProductSubColor__ProductId { get; set; }
+    [ForeignKey("ProductSubColor__ProductId")]
+    public virtual Product? Product { get; set; }
+
+}
+
+
+
+
+
+namespace IVY.Domain.Models.Products
+{
+    public class ProductSubColorFile
+    {   
+        [Key]
+        public int ProductSubColorFile__Id { get; set; }
+        public required string ProductSubColorFile__Name { get; set; }
+        public int ProductSubColorFile__ProductSubColorId { get; set; }
+        [ForeignKey("ProductSubColorFile__ProductSubColorId")]
+        public ProductSubColor? ProductSubColor { get; set; }
+    }
+}
+
+
+public class Size
+{
+    [Key]
+    public int Size__Id { get; set; }
+    public int Size__S { get; set; }
+    public int Size__M { get; set; }
+    public int Size__L { get; set; }
+    public int Size__XL { get; set; }
+    public int Size__XXl { get; set; }
+    public int Size__ProductColorId { get; set; }
+    public ProductSubColor? ProductColor { get; set; }
+}
+
+
+
+
+namespace IVY.Domain.Models.Products
+{   
+
+    public class SubCategory
+    {   
+        [Key]
+        public int SubCategory__Id { get; set; }
+        public required string SubCategory__Name { get; set; }
+        public required int SubCategory__Status { get; set; }
+        public  int SubCategory__CategoryId {get;set;}
+        [ForeignKey("SubCategory__CategoryId")]
+        public Category? Category { get; set; }
+        public virtual ICollection<ProductSubCategory>? ProductSubCategories { get; set; }
+    }
+}
+
+public class SubColor
+{   
+    [Key]
+    public int SubColor__Id { get; set; }
+    public required string SubColor__Name { get; set; }
+    public required string SubColor__Image { get; set; }
+    public required byte SubColor__Status { get; set; }
+    public virtual ICollection<ProductSubColor>? ProductSubColors { get; set; }
+}

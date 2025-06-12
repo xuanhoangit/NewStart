@@ -1,230 +1,177 @@
 
-using IVY.Application.DTOs.Products;
+using AutoMapper;
+using IVY.Application.DTOs;
+using IVY.Application.DTOs.Filters;
 using IVY.Application.Interfaces.IRepository;
-using IVY.Application.IServices;
-using IVY.Domain.Models;
+using IVY.Application.Interfaces.IServices.Product;
+using IVY.Domain.Enums;
+using IVY.Domain.Libs;
+using IVY.Domain.Models.Products;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 
 
 namespace IVY.Application.Services.Products;
 
-public class ProductService : BaseService
+public class ProductService : IProductService
 {
     private readonly IUnitOfWork _uow;
-
-    public ProductService(IUnitOfWork uow) : base(uow)
-    {
-        _uow = uow;
-    }
-
-    public ProductGetDTO GetProductById(int id){
-        try
-        {
-    
-            var product = _uow.Product.FirstOrDefault(x=>x.Product__Id==id && x.Product__Status !=(int)Status.Deleted);
-            if(product==null){}
-                
-                
-        }
-        catch (System.Exception e)
-        {
-            
-            return BadRequest(e);
-        }
-    }
-
-    [HttpGet("filter")]
-    public IActionResult GetProductsByFilter([FromQuery] ProductFilter filter,int page=1){
-        try
-        {   
-            var products= _uow.Product.GetFilteredProducts(filter).Where(x=>x.Product__Status!=(int)Status.Deleted).Skip((page-1)*unitInAPage).Take(unitInAPage).ToList();
-            if(products==null)
-            return NotFound("No results found");
-            return Ok(products);
-        }
-        catch (System.Exception e)
-        {
-            
-            return BadRequest(e);
-        }
-    }
-    
-    [HttpGet("category/{category_id}/page/{page}")]
-    public IActionResult GetProductsByCategory(int category_id,int page=1){
-        try
-        {
-            var category= _uow.Category.Get(category_id);
-            if(category==null){
-                return NotFound("Category is not exists");
-            }
-            var ids= _uow.ProductCategory.GetAll(x=>x.ProductCategory__CategoryId==category_id).Select(x=>x.ProductCategory__ProductId).ToList();
-            System.Console.WriteLine(ids);
-            if(ids==null || ids.Count()<=0){
-                return NotFound("No results found");
-            }
-            var products=_uow.Product.GetAll(x=>ids.Contains(x.Product__Id) && x.Product__Status !=(int)Status.Deleted).Skip((page-1)*unitInAPage).Take(unitInAPage);
-            return Ok(products);
-        }
-        catch (System.Exception e)
-        {
-            
-            return BadRequest(e);
-        }
-    }
-}
-
-[ApiController]
-[Route("api/products")]
-[Authorize(Roles=RolesName.ProductManager)]
-public class ActionProductController : BaseController
-{
-    private readonly IUnitOfWork _uow;
+    private readonly IMemoryCache _memoryCache;
     private readonly IMapper _mapper;
 
-    public ActionProductController(IUnitOfWork uow,IMapper mapper):base(uow)
-    {   
+    public ProductService(IUnitOfWork uow, IMemoryCache memoryCache,IMapper mapper)
+    {
         _uow = uow;
+        _memoryCache = memoryCache;
         _mapper = mapper;
     }
 
-    [HttpPatch("publish")]
-    public IActionResult ReleaseProducts([FromBody] List<int> ids){
-        try
+    public List<dynamic> Search(string text)
+    {
+        text = StringValid.ConvertToValidString(text);
+        var result = _uow.Product.GetAll(x => x.Product__Name.Contains(text) && x.Product__Status != (int)ProductStatus.Deleted, "", 10)
+        .Select(x => new
         {
-            if (ids == null || !ids.Any())
-                return BadRequest(new { Message = "No product provided" });
-
-            var failed=new List<string>();
-            foreach (var id in ids)
-            {   
-                var p=_uow.Product.FirstOrDefault(x=>x.Product__Id==id && x.Product__Status==(int)Status.Unreleased);
-                if(p==null){
-                    failed.Add($"No results found for product with ID = {id}");
-                    continue;
-                }
-                
-                    p.Product__Status=(int)Status.Released;
-                    var result=_uow.Product.Update(p);
-                    if(!result)
-                    failed.Add($"Fail to publish product {p.Product__Name}");
-
-                
-            }
-            return !failed.Any()?Ok(new {Message="Published products successfully"}):Ok(failed);
-        }
-        catch (System.Exception e )
-        {
-            
-            return BadRequest(e);
-        }
+            x.Product__Name,
+            x.Product__Id
+        })
+        .Cast<dynamic>()
+        .ToList();
+        return result;
     }
-    [HttpPatch("stop-publishing")]
-    public IActionResult StopPublishing([FromBody]List<int> ids){
-        try
+    private void AddProductSubCategoryAndProductCollection(int[] CollectionIds, int[] SubCategoryIds, int productId)
+    {
+        System.Console.WriteLine("Pridyct ID: " + productId);
+        foreach (var collectionId in CollectionIds)
         {
-        if (ids == null || !ids.Any())
-            return BadRequest(new { Message = "No product provided" });
-
-        var failed=new List<string>();
-        foreach (var id in ids)
-        {   
-            var p=_uow.Product.GetFirstOrDefault(x=>x.Product__Id==id && x.Product__Status==(int)Status.Released,"ProductColors");
-            if(p==null)
-            {
-                failed.Add($"No results found for product with ID = {id}");
+            var productCollection = _uow.ProductCollection.Find(x => x.ProductCollection__ProductId == productId && x.ProductCollection__CollectionId == collectionId);
+            if (productCollection != null)
                 continue;
-            }
-            
-                p.Product__Status=(int)Status.Unreleased;
-                var result=_uow.Product.Update(p);
-                if(result){
-                    foreach (var pc in p.ProductColors)
-                    {
-                        pc.ProductColor__Status=(int)Status.Unreleased;
-                        _uow.ProductColor.Update(pc);
-                    }
-                }
-                if(!result)
-                failed.Add($"Fail to stop publishing product {p.Product__Name}");
-                
+            _uow.ProductCollection.Add(new ProductCollection
+            {
+                ProductCollection__CollectionId = collectionId,
+                ProductCollection__ProductId = productId
+            });
         }
-        return  !failed.Any()?Ok(new {Message="Stop publishing products successfully"}):Ok(failed);
-                    
-        }
-        catch (System.Exception e)
+        foreach (var subCateId in SubCategoryIds)
         {
-            
-            return BadRequest(e);
+            var productSCategory = _uow.ProductSubCategory.Find(x => x.ProductSubCategory__ProductId == productId && x.ProductSubCategory__SubCategoryId == subCateId);
+            if (productSCategory != null)
+                continue;
+            _uow.ProductSubCategory.Add(new ProductSubCategory
+            {
+                ProductSubCategory__SubCategoryId = subCateId,
+                ProductSubCategory__ProductId = productId,
+            });
         }
     }
-    [HttpPost("create")]
-    public IActionResult Create([FromBody]ProductDTO productDto){
-        try
+    public async Task<Result<ProductGetWithProductHomeShowDTO>> Add(ProductFormAddDTO productFormAddDTO)
+    {
+        productFormAddDTO.Product__Name = StringValid.ConvertToValidString(productFormAddDTO.Product__Name);
+        //check subcategory is exist
+        var subCateIsExist = _uow.SubCategory.Find(x => productFormAddDTO.SubCategoryIds.Contains(x.SubCategory__Id));
+
+        if (subCateIsExist.Count() != productFormAddDTO.SubCategoryIds.Count())
         {
-            if(!ModelState.IsValid){
-                return BadRequest(new {result=false,message="add product failed"});
-            }
-            var isExist=_uow.Product.FirstOrDefault(x=>x.Product__Name==productDto.Product__Name );
-            if(isExist!=null){
-                if(isExist.Product__Status!= (int)Status.Deleted){
-                    return BadRequest("Product is already exist");
-                }
-                isExist.Product__Status=(int)Status.Unreleased;
-                
-                return Ok(new {result=_uow.Product.Update(isExist),message="added product successfully"});
-            }
-            var product=_mapper.Map<Product>(productDto);
-            var isSuccess=_uow.Product.Add(product);
-            return isSuccess?Ok(new {result=isSuccess,message="added product successfully"})
-            :BadRequest(new {result=isSuccess,message="add product failed"});
+            return Result<ProductGetWithProductHomeShowDTO>.Failure(ResultStatus.BadRequest);
         }
-        catch (System.Exception e)
+        //check collection is exist
+        var collectionIsExist = _uow.Collection.Find(x => productFormAddDTO.CollectionIds.Contains(x.Collection__Id));
+        if (collectionIsExist.Count() != productFormAddDTO.CollectionIds.Count())
         {
-            
-            return BadRequest(e);
+            return Result<ProductGetWithProductHomeShowDTO>.Failure(ResultStatus.BadRequest);
         }
+        // check product is exist
+        var product = _uow.Product.GetFirstOrDefault(x => x.Product__Name == productFormAddDTO.Product__Name);
+        if (product == null)
+        {
+            var newProduct = new Product
+            {
+                Product__Name = productFormAddDTO.Product__Name,
+                Product__SeasonId = productFormAddDTO.Product__SeasonId,
+                Product__CreateAt = DateTime.UtcNow,
+                Product__Status = (int)ProductStatus.Releasing,
+                Product__Sold = 0,
+            };
+            var result = await _uow.Product.AddAsync(newProduct);
+            if (result)
+            {
+                AddProductSubCategoryAndProductCollection(
+                productFormAddDTO.CollectionIds, productFormAddDTO.SubCategoryIds, newProduct.Product__Id);
+                var data = _mapper.Map<ProductGetWithProductHomeShowDTO>(newProduct);
+                return Result<ProductGetWithProductHomeShowDTO>.Created(data);
+            }
+            return Result<ProductGetWithProductHomeShowDTO>.Failure(ResultStatus.InternalError);
+        }
+        // nếu product đã tồn tại nhưng status = deleted
+        // => active sản phẩm
+        if (product.Product__Status == (int)ProductStatus.Deleted)
+        {
+            product.Product__Status = (int)ProductStatus.Releasing;
+            product.Product__Sold = 0;
+            product.Product__CreateAt = DateTime.UtcNow;
+            product.Product__SeasonId = productFormAddDTO.Product__SeasonId;
+            //bổ sung thêm thông tin
+            var result = _uow.Product.Update(product);
+            if (result)
+            {
+                AddProductSubCategoryAndProductCollection(
+                    productFormAddDTO.CollectionIds, productFormAddDTO.SubCategoryIds, product.Product__Id);
+                var data = _mapper.Map<ProductGetWithProductHomeShowDTO>(product);
+                return Result<ProductGetWithProductHomeShowDTO>.Success(data);
+            }
+            return Result<ProductGetWithProductHomeShowDTO>.Failure(ResultStatus.InternalError); ;
+        }
+        return Result<ProductGetWithProductHomeShowDTO>.Failure(ResultStatus.Conflict);
     }
-    [HttpPut("update")]
-    public IActionResult Update([FromBody]ProductDTO productDto){
-        try
+
+    public async Task<dynamic> GetProductByFilter(ProductFilter filter)
+    {
+
+
+        var products = await _uow.Product.GetAllDTO(filter);
+        return new
         {
-            if(!ModelState.IsValid){
-                return BadRequest(new {result=false,message="update product failed"});
-            }
-            var product=_mapper.Map<Product>(productDto);
-            product.Product__UpdatedDate=DateTime.UtcNow;
-            var isSuccess=_uow.Product.Update(product);
-            return isSuccess?Ok(new {result=isSuccess,message="updated product successfully"})
-            :BadRequest(new {result=isSuccess,message="update product failed"});
-        }
-        catch (System.Exception e)
-        {
-            
-            return BadRequest(e);
-        }
+            products,
+            count = _uow.Product.GetAll().Count()
+        };
     }
-    [HttpPatch("delete/{id}")]
-    public IActionResult Detele(int id){
-        try
+    public async Task<dynamic> GetProducts(int Page)
+    {
+
+        var cacheKey = "page_" + Page;
+
+        if (!_memoryCache.TryGetValue(cacheKey, out dynamic data))
         {
-            var product=_uow.Product.GetFirstOrDefault(x=>x.Product__Id==id,"ProductColors");
-            //changeStatus
-            product.Product__Status=(int)Status.Deleted;
-            var isSuccess=_uow.Product.Update(product);
-            if(isSuccess){
-                
-                    foreach (var pc in product.ProductColors)
-                    {
-                        pc.ProductColor__Status=(int)Status.Deleted;
-                        _uow.ProductColor.Update(pc);
-                    }
-                    return Ok(new {result=isSuccess,message="deleted product successfully"});
-            }
-            return BadRequest(new {result=isSuccess,message="delete product failed"});
+
+            var products = await _uow.Product.GetAllDTO(Page);
+
+            var cacheOptions = new MemoryCacheEntryOptions
+            {
+                AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(10),
+                SlidingExpiration = TimeSpan.FromMinutes(5)
+            };
+
+            _memoryCache.Set(cacheKey, new
+            {
+                products,
+                count = _uow.Product.GetAll().Count()
+            }, cacheOptions);
         }
-        catch (System.Exception e)
-        {
-            
-            return BadRequest(e);
-        }
+        return data;
+
     }
+    public bool Remove(int product__Id)
+    {
+        var product = _uow.Product.Get(product__Id);
+        if (product == null)
+        {
+            return false;
+        }
+        product.Product__Status = (int)ProductStatus.Deleted;
+        _uow.Product.Update(product);
+        return true;
+    }
+    
+  
 }

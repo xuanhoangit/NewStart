@@ -1,4 +1,4 @@
-using IVY.Domain.Models;
+using IVY.Domain.Models.Products;
 using IVY.Infrastructure.Data;
 using IVY.Application.Interfaces.IRepository.Products;
 

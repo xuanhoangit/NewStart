@@ -1,0 +1,73 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\09659\\Downloads\\NewStart\\NewStart\\API\\IVYDashboard.API\\wwwroot\\images\\colors\\b9dd7ddf-9eba-458e-8cfe-0ad589d6043b.jpg",
+      "PackagePath": "staticwebassets\\images\\colors\\b9dd7ddf-9eba-458e-8cfe-0ad589d6043b.jpg"
+    },
+    {
+      "Id": "C:\\Users\\09659\\Downloads\\NewStart\\NewStart\\API\\IVYDashboard.API\\wwwroot\\images\\colors\\beige.png",
+      "PackagePath": "staticwebassets\\images\\colors\\beige.png"
+    },
+    {
+      "Id": "C:\\Users\\09659\\Downloads\\NewStart\\NewStart\\API\\IVYDashboard.API\\wwwroot\\images\\colors\\black.png",
+      "PackagePath": "staticwebassets\\images\\colors\\black.png"
+    },
+    {
+      "Id": "C:\\Users\\09659\\Downloads\\NewStart\\NewStart\\API\\IVYDashboard.API\\wwwroot\\images\\colors\\blue.png",
+      "PackagePath": "staticwebassets\\images\\colors\\blue.png"
+    },
+    {
+      "Id": "C:\\Users\\09659\\Downloads\\NewStart\\NewStart\\API\\IVYDashboard.API\\wwwroot\\images\\colors\\brown.png",
+      "PackagePath": "staticwebassets\\images\\colors\\brown.png"
+    },
+    {
+      "Id": "C:\\Users\\09659\\Downloads\\NewStart\\NewStart\\API\\IVYDashboard.API\\wwwroot\\images\\colors\\gray.png",
+      "PackagePath": "staticwebassets\\images\\colors\\gray.png"
+    },
+    {
+      "Id": "C:\\Users\\09659\\Downloads\\NewStart\\NewStart\\API\\IVYDashboard.API\\wwwroot\\images\\colors\\green.png",
+      "PackagePath": "staticwebassets\\images\\colors\\green.png"
+    },
+    {
+      "Id": "C:\\Users\\09659\\Downloads\\NewStart\\NewStart\\API\\IVYDashboard.API\\wwwroot\\images\\colors\\orange.png",
+      "PackagePath": "staticwebassets\\images\\colors\\orange.png"
+    },
+    {
+      "Id": "C:\\Users\\09659\\Downloads\\NewStart\\NewStart\\API\\IVYDashboard.API\\wwwroot\\images\\colors\\pink.png",
+      "PackagePath": "staticwebassets\\images\\colors\\pink.png"
+    },
+    {
+      "Id": "C:\\Users\\09659\\Downloads\\NewStart\\NewStart\\API\\IVYDashboard.API\\wwwroot\\images\\colors\\purple.png",
+      "PackagePath": "staticwebassets\\images\\colors\\purple.png"
+    },
+    {
+      "Id": "C:\\Users\\09659\\Downloads\\NewStart\\NewStart\\API\\IVYDashboard.API\\wwwroot\\images\\colors\\red.png",
+      "PackagePath": "staticwebassets\\images\\colors\\red.png"
+    },
+    {
+      "Id": "C:\\Users\\09659\\Downloads\\NewStart\\NewStart\\API\\IVYDashboard.API\\wwwroot\\images\\colors\\white.png",
+      "PackagePath": "staticwebassets\\images\\colors\\white.png"
+    },
+    {
+      "Id": "C:\\Users\\09659\\Downloads\\NewStart\\NewStart\\API\\IVYDashboard.API\\wwwroot\\images\\colors\\yellow.png",
+      "PackagePath": "staticwebassets\\images\\colors\\yellow.png"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.IVYDashboard.API.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.IVYDashboard.API.props",
+      "PackagePath": "build\\IVYDashboard.API.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.IVYDashboard.API.props",
+      "PackagePath": "buildMultiTargeting\\IVYDashboard.API.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.IVYDashboard.API.props",
+      "PackagePath": "buildTransitive\\IVYDashboard.API.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

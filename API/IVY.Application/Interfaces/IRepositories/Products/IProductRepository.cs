@@ -1,13 +1,15 @@
 
 
-using IVY.Application.DTOs.Products;
-using IVY.Domain.Models;
+using IVY.Application.DTOs;
+using IVY.Application.DTOs.Filters;
+using IVY.Domain.Models.Products;
 
 namespace IVY.Application.Interfaces.IRepository.Products;
 public interface IProductRepository : IRepository<Product>
 {
 
-        // IQueryable<Product> GetFilteredProducts(ProductFilter filter);
-        Task<ProductGetWithProductHomeShowDTO> GetDTO(ProductFilter filter);
+        Task<bool> AddProduct(ProductFormAddDTO addDTO);
+        // Task<ProductGetWithProductHomeShowDTO> GetDTO(ProductFilter filter);
         Task<List<ProductGetWithProductHomeShowDTO>> GetAllDTO(ProductFilter filter);
+        Task<List<ProductGetWithProductHomeShowDTO>> GetAllDTO(int page);
 }

@@ -1,4 +1,4 @@
-using IVY.Domain.Models;
+using IVY.Domain.Models.Products;
 using IVY.Domain.Models.Users;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -15,7 +15,7 @@ public class IVYDbContext : IdentityDbContext<EmployeeIdentity,IdentityRole<Guid
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
-         // TPT mapping: mỗi loại user nằm ở 1 bảng riêng
+        // TPT mapping: mỗi loại user nằm ở 1 bảng riêng
         builder.Entity<EmployeeIdentity>().ToTable("Employees");
 
         builder.Entity<IdentityRole<Guid>>(entity =>
@@ -47,17 +47,25 @@ public class IVYDbContext : IdentityDbContext<EmployeeIdentity,IdentityRole<Guid
             entity.Property(x => x.UserId).HasColumnName("UserId");
         });
 
+        builder.Entity<Size>().HasIndex(x => x.Size__ProductSubColorId)
+        .IsUnique();
+        builder.Entity<ProductSubColor>().HasIndex(x => x.ProductSubColor__OutfitKey)
+        .IsUnique();
     }
     public DbSet<Customer> Customers { get; set; }
     public DbSet<Product> Products { get; set; }
-    public DbSet<ProductColor> ProductColors { get; set; }
-    public DbSet<ProductCategory> ProductCategories { get; set; }
+    public DbSet<ProductSubColor> ProductSubColors { get; set; }
+    public DbSet<ColorSubColor> ColorSubColors { get; set; }
+    public DbSet<SubColor> SubColors { get; set; }
+    public DbSet<ProductSubCategory> ProductSubCategories { get; set; }
+    public DbSet<SubCategory> SubCategories { get; set; }
     public DbSet<ProductCollection> ProductCollections { get; set; }
     public DbSet<Category> Categories { get; set; }
     public DbSet<Collection> Collections { get; set; }
+    // public DbSet<ProductLine> ProductLines { get; set; }
     public DbSet<Size> Sizes { get; set; }
     public DbSet<Color> Colors { get; set; }
-    public DbSet<ProductColorFile> ProductColorFiles { get; set; }
+    public DbSet<ProductSubColorFile> ProductSubColorFiles { get; set; }
     public DbSet<ProductFavorite> ProductFavorites { get; set; }
 
 }

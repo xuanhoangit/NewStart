@@ -1,7 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using IVY.Domain.Enums;
 
-namespace IVY.Domain.Models
+namespace IVY.Domain.Models.Products
 {   
 
     public class Collection

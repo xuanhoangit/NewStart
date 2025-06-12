@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Download\\NewStart\\API\\IVY.Domain\\IVY.Domain.csproj": {}
+    "C:\\Users\\09659\\Downloads\\NewStart\\NewStart\\API\\IVY.Domain\\IVY.Domain.csproj": {}
   },
   "projects": {
-    "D:\\Download\\NewStart\\API\\IVY.Domain\\IVY.Domain.csproj": {
+    "C:\\Users\\09659\\Downloads\\NewStart\\NewStart\\API\\IVY.Domain\\IVY.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Download\\NewStart\\API\\IVY.Domain\\IVY.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\09659\\Downloads\\NewStart\\NewStart\\API\\IVY.Domain\\IVY.Domain.csproj",
         "projectName": "IVY.Domain",
-        "projectPath": "D:\\Download\\NewStart\\API\\IVY.Domain\\IVY.Domain.csproj",
-        "packagesPath": "C:\\Users\\WelCome To BVCN02\\.nuget\\packages\\",
-        "outputPath": "D:\\Download\\NewStart\\API\\IVY.Domain\\obj\\",
+        "projectPath": "C:\\Users\\09659\\Downloads\\NewStart\\NewStart\\API\\IVY.Domain\\IVY.Domain.csproj",
+        "packagesPath": "C:\\Users\\09659\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\09659\\Downloads\\NewStart\\NewStart\\API\\IVY.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\WelCome To BVCN02\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\09659\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -72,7 +72,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.404/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.408/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

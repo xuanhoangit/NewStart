@@ -19,9 +19,9 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity :class
         {
             return _dbSet.Find(id);
         }
-        public DbSet<TEntity> GetQuery(){
-            return _dbSet;
-        }
+        // public DbSet<TEntity> GetQuery(){
+        //     return _dbSet;
+        // }
         public TEntity GetFirstOrDefault(Expression<Func<TEntity, bool>> filter, string? includeProperties = null, bool tracked = true)
         {
             if (tracked)
@@ -56,12 +56,12 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity :class
             return _dbSet.ToList();
         }
 
-        public IEnumerable<TEntity> GetAll(Expression<Func<TEntity, bool>>? filter=null, string? includeProperties = null)
+        public IEnumerable<TEntity> GetAll(Expression<Func<TEntity, bool>>? filter=null, string? includeProperties = null,byte limit=0)
         {
             IQueryable<TEntity> query = _dbSet;
             if (filter != null) 
             {
-                query = query.Where(filter);
+                query = query.Where(filter).Take(limit);
             }
             if (includeProperties != null)
             {
@@ -141,9 +141,10 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity :class
                     _context.SaveChanges();
                     transaction.Commit();
                 }
-                catch (System.Exception)
+                catch (System.Exception e)
                 {
                     transaction.Rollback();
+                    System.Console.WriteLine(e);
                     return false;
                 }
             }

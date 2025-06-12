@@ -4,13 +4,13 @@ using Microsoft.EntityFrameworkCore;
 namespace IVY.Application.Interfaces.IRepository;
 public interface IRepository<TEntity> where TEntity : class 
 {       
-        DbSet<TEntity> GetQuery();
+        // DbSet<TEntity> GetQuery();
         TEntity Get(int? id);
 
         TEntity GetFirstOrDefault(Expression<Func<TEntity, bool>> filter, string? includeProperties = null, bool tracked = true);
         IEnumerable<TEntity> GetAll();
 
-        IEnumerable<TEntity> GetAll(Expression<Func<TEntity, bool>>? filter=null, string? includeProperties = null);
+        IEnumerable<TEntity> GetAll(Expression<Func<TEntity, bool>>? filter=null, string? includeProperties = null,byte limit=0);
 
         Task<IEnumerable<TEntity>> GetAllAsync();
         Task<IEnumerable<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>>? filter=null, string? includeProperties = null);

@@ -1,5 +1,7 @@
 using System.ComponentModel.DataAnnotations;
-namespace IVY.Domain.Models;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
+namespace IVY.Domain.Models.Products;
 public class Size
 {
     [Key]
@@ -9,6 +11,8 @@ public class Size
     public int Size__L { get; set; }
     public int Size__XL { get; set; }
     public int Size__XXl { get; set; }
-    public int Size__ProductColorId { get; set; }
-    public ProductColor? ProductColor { get; set; }
+    public int Size__ProductSubColorId { get; set; }
+    [ForeignKey("Size__ProductSubColorId")]
+    [JsonIgnore]
+    public ProductSubColor? ProductSubColor { get; set; }
 }

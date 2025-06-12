@@ -1,6 +1,6 @@
 using System.ComponentModel;
 
-namespace IVY.Domain.Models
+namespace IVY.Domain.Enums
 {
     public enum ProductStatus
     {   

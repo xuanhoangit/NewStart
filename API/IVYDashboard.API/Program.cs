@@ -1,6 +1,10 @@
+using System.Drawing;
 using System.Text;
 using DotNetEnv;
 using IVY.Application.Interfaces.IRepository;
+using IVY.Application.Interfaces.IServices.Product;
+using IVY.Application.Services;
+using IVY.Application.Services.Products;
 using IVY.Domain.Models.Users;
 using IVY.Infrastructure.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -22,8 +26,7 @@ builder.Services.AddCors(options =>
                       policy  =>
                       {
                           policy
-                            .WithOrigins(Environment.GetEnvironmentVariable("OriginHost"))
-                            // .WithOrigins("http://127.0.0.1:50461")
+                            .WithOrigins(Environment.GetEnvironmentVariable("OriginHost"),"http://127.0.0.1:5500")
                             .AllowAnyHeader()
                             .AllowAnyMethod()
                             .AllowCredentials(); // nếu bạn gửi cookie/token theo kiểu credentials
@@ -33,11 +36,27 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<IVYDbContext>(options =>
-    options.UseSqlServer(Environment.GetEnvironmentVariable("ConnectionString"),b=>b.MigrationsAssembly("IVYDashboard.API")));
-
+    options.UseSqlServer(
+        Environment.GetEnvironmentVariable("ConnectionString"),
+        sqlOptions =>
+            sqlOptions.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery).
+            MigrationsAssembly("IVYDashboard.API")
+        )
+         // <- đúng chỗ
+);
 
 // builder.Services.AddScoped<IVnpay, Vnpay>();
+builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IOutfitService, OutfitService>();
+builder.Services.AddScoped<ISizeService, SizeService>();
+builder.Services.AddScoped<IColorService, ColorService>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<ICollectionService, CollectionService>();
+builder.Services.AddScoped<ISubColorService, SubColorService>();
+builder.Services.AddScoped<IProductSubColorFileService, ProductSubColorFileService>();
+builder.Services.AddScoped<IProductSubColorService, ProductSubColorService>();
 builder.Services.AddTransient<IUnitOfWork,UnitOfWork>();
+// builder.Services.AddTransient<IEmailSender,EmailSender>();
 // builder.Services.AddTransient<IEmailSender,EmailSender>();
 // builder.Services.AddTransient<IJwtService,JwtService>();
 builder.Services.AddIdentity<EmployeeIdentity, IdentityRole<Guid>>()
@@ -109,7 +128,7 @@ builder.Services.AddAuthorization();
 builder.Services.AddControllers();
 //End Cònig
 // Đăng ký AutoMapper
-// builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
+builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddMemoryCache(); // Thêm dịch vụ MemoryCache
@@ -120,11 +139,11 @@ var app = builder.Build();
 
 
 // Configure the HTTP request pipeline.
-// if (app.Environment.IsDevelopment())
-// {
-//     app.UseSwagger();
-//     app.UseSwaggerUI();
-// }
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 app.UseStaticFiles();
 app.UseHttpsRedirection();
 

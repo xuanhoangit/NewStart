@@ -1,4 +1,8 @@
 namespace IVY.Application.DTOs.Filters;
+    public enum TypeOfCategory{
+        Common=1,
+        AlternatingEvents=2
+    }
     public class RangePrice{
         public decimal? MinPrice { get; set; }
         public decimal? MaxPrice { get; set; }

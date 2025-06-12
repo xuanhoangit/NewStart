@@ -10,3 +10,16 @@ D:\Download\NewStart\API\IVY.Domain\obj\Debug\net8.0\refint\IVY.Domain.dll
 D:\Download\NewStart\API\IVY.Domain\obj\Debug\net8.0\IVY.Domain.pdb
 D:\Download\NewStart\API\IVY.Domain\obj\Debug\net8.0\ref\IVY.Domain.dll
 D:\Download\NewStart\API\IVY.Domain\obj\Debug\net8.0\IVY.Domain.csproj.AssemblyReference.cache
+C:\Users\09659\Downloads\NewStart\NewStart\API\IVY.Domain\bin\Debug\net8.0\IVY.Domain.deps.json
+C:\Users\09659\Downloads\NewStart\NewStart\API\IVY.Domain\bin\Debug\net8.0\IVY.Domain.dll
+C:\Users\09659\Downloads\NewStart\NewStart\API\IVY.Domain\bin\Debug\net8.0\IVY.Domain.pdb
+C:\Users\09659\Downloads\NewStart\NewStart\API\IVY.Domain\obj\Debug\net8.0\IVY.Domain.csproj.AssemblyReference.cache
+C:\Users\09659\Downloads\NewStart\NewStart\API\IVY.Domain\obj\Debug\net8.0\IVY.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\09659\Downloads\NewStart\NewStart\API\IVY.Domain\obj\Debug\net8.0\IVY.Domain.AssemblyInfoInputs.cache
+C:\Users\09659\Downloads\NewStart\NewStart\API\IVY.Domain\obj\Debug\net8.0\IVY.Domain.AssemblyInfo.cs
+C:\Users\09659\Downloads\NewStart\NewStart\API\IVY.Domain\obj\Debug\net8.0\IVY.Domain.csproj.CoreCompileInputs.cache
+C:\Users\09659\Downloads\NewStart\NewStart\API\IVY.Domain\obj\Debug\net8.0\IVY.Domain.sourcelink.json
+C:\Users\09659\Downloads\NewStart\NewStart\API\IVY.Domain\obj\Debug\net8.0\IVY.Domain.dll
+C:\Users\09659\Downloads\NewStart\NewStart\API\IVY.Domain\obj\Debug\net8.0\refint\IVY.Domain.dll
+C:\Users\09659\Downloads\NewStart\NewStart\API\IVY.Domain\obj\Debug\net8.0\IVY.Domain.pdb
+C:\Users\09659\Downloads\NewStart\NewStart\API\IVY.Domain\obj\Debug\net8.0\ref\IVY.Domain.dll

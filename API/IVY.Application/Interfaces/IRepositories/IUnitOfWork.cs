@@ -12,15 +12,21 @@ public interface IUnitOfWork
     // IOrderRepository Order { get; }
     // IOrderItemRepository OrderItem { get; }
     // //IProduct
-    IProductColorFileRepository ProductColorFile { get; }
+    IProductSubColorFileRepository ProductSubColorFile { get; }
     IProductFavoriteRepository ProductFavorite { get; }
     IProductRepository Product { get; }
+    IOutfitRepository Outfit { get; }
     IProductCollectionRepository ProductCollection { get; }
     ISizeRepository Size { get; }
     ICategoryRepository Category { get; }
     IColorRepository Color { get; }
-    IProductColorRepository ProductColor { get; }
-    IProductCategoryRepository ProductCategory { get; }
+    ISubColorRepository SubColor { get; }
+    IColorSubColorRepository ColorSubColor { get; }
+
+    ICollectionRepository Collection { get; }
+    IProductSubColorRepository ProductSubColor { get; }
+    IProductSubCategoryRepository ProductSubCategory { get; }
+    ISubCategoryRepository SubCategory { get; }
 
     ICustomerRepository Customer { get; }
     // IStaffInfoRepository StaffInfo { get; }

@@ -5,6 +5,10 @@
     <ProjectReference Include="..\IVY.Domain\IVY.Domain.csproj" />
   </ItemGroup>
   <ItemGroup>
+        <!-- <None Update="Google\ivyhaha-9d64b0fdf29b.json">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None> -->
+        <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
         <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.4" />
         <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="8.0.4" />
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.1" />

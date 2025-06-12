@@ -76,6 +76,24 @@
           }
         }
       },
+      "CloudinaryDotNet/1.27.5": {
+        "type": "package",
+        "dependencies": {
+          "Newtonsoft.Json": "13.0.3",
+          "System.Net.Http": "4.3.4",
+          "System.Text.RegularExpressions": "4.3.1"
+        },
+        "compile": {
+          "lib/netstandard2.0/CloudinaryDotNet.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/CloudinaryDotNet.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "DotNetEnv/3.1.1": {
         "type": "package",
         "dependencies": {
@@ -3378,6 +3396,8 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
         "dependencies": {
+          "AutoMapper.Extensions.Microsoft.DependencyInjection": "12.0.1",
+          "CloudinaryDotNet": "1.27.5",
           "IVY.Domain": "1.0.0",
           "Microsoft.AspNetCore.Http": "2.3.0"
         },
@@ -3407,6 +3427,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
         "dependencies": {
+          "AutoMapper.Extensions.Microsoft.DependencyInjection": "12.0.1",
           "IVY.Application": "1.0.0",
           "IVY.Domain": "1.0.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "8.0.4",
@@ -3490,6 +3511,25 @@
         "azureicon.png",
         "lib/netstandard2.0/Azure.Identity.dll",
         "lib/netstandard2.0/Azure.Identity.xml"
+      ]
+    },
+    "CloudinaryDotNet/1.27.5": {
+      "sha512": "wYq4VGuy6o49XMG97jITrXM//4a60Lf5WzuvDcn7tpPrkYJMnaRuAl1xA9CsHlKzxOD1MYRmUYxQGSbcEG1TMQ==",
+      "type": "package",
+      "path": "cloudinarydotnet/1.27.5",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "CloudinaryIcon.png",
+        "README.md",
+        "cloudinarydotnet.1.27.5.nupkg.sha512",
+        "cloudinarydotnet.nuspec",
+        "lib/net452/CloudinaryDotNet.dll",
+        "lib/net452/CloudinaryDotNet.xml",
+        "lib/netstandard1.3/CloudinaryDotNet.dll",
+        "lib/netstandard1.3/CloudinaryDotNet.xml",
+        "lib/netstandard2.0/CloudinaryDotNet.dll",
+        "lib/netstandard2.0/CloudinaryDotNet.xml"
       ]
     },
     "DotNetEnv/3.1.1": {
@@ -10525,7 +10565,6 @@
   },
   "projectFileDependencyGroups": {
     "net8.0": [
-      "AutoMapper.Extensions.Microsoft.DependencyInjection >= 12.0.1",
       "DotNetEnv >= 3.1.1",
       "Google.Apis.Auth.AspNetCore3 >= 1.69.0",
       "IVY.Application >= 1.0.0",
@@ -10542,19 +10581,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\WelCome To BVCN02\\.nuget\\packages\\": {}
+    "C:\\Users\\09659\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Download\\NewStart\\API\\IVYDashboard.API\\IVYDashboard.API.csproj",
+      "projectUniqueName": "C:\\Users\\09659\\Downloads\\NewStart\\NewStart\\API\\IVYDashboard.API\\IVYDashboard.API.csproj",
       "projectName": "IVYDashboard.API",
-      "projectPath": "D:\\Download\\NewStart\\API\\IVYDashboard.API\\IVYDashboard.API.csproj",
-      "packagesPath": "C:\\Users\\WelCome To BVCN02\\.nuget\\packages\\",
-      "outputPath": "D:\\Download\\NewStart\\API\\IVYDashboard.API\\obj\\",
+      "projectPath": "C:\\Users\\09659\\Downloads\\NewStart\\NewStart\\API\\IVYDashboard.API\\IVYDashboard.API.csproj",
+      "packagesPath": "C:\\Users\\09659\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\09659\\Downloads\\NewStart\\NewStart\\API\\IVYDashboard.API\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\WelCome To BVCN02\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\09659\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
@@ -10566,14 +10605,14 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "D:\\Download\\NewStart\\API\\IVY.Application\\IVY.Application.csproj": {
-              "projectPath": "D:\\Download\\NewStart\\API\\IVY.Application\\IVY.Application.csproj"
+            "C:\\Users\\09659\\Downloads\\NewStart\\NewStart\\API\\IVY.Application\\IVY.Application.csproj": {
+              "projectPath": "C:\\Users\\09659\\Downloads\\NewStart\\NewStart\\API\\IVY.Application\\IVY.Application.csproj"
             },
-            "D:\\Download\\NewStart\\API\\IVY.Domain\\IVY.Domain.csproj": {
-              "projectPath": "D:\\Download\\NewStart\\API\\IVY.Domain\\IVY.Domain.csproj"
+            "C:\\Users\\09659\\Downloads\\NewStart\\NewStart\\API\\IVY.Domain\\IVY.Domain.csproj": {
+              "projectPath": "C:\\Users\\09659\\Downloads\\NewStart\\NewStart\\API\\IVY.Domain\\IVY.Domain.csproj"
             },
-            "D:\\Download\\NewStart\\API\\IVY.Infrastructure\\IVY.Infrastructure.csproj": {
-              "projectPath": "D:\\Download\\NewStart\\API\\IVY.Infrastructure\\IVY.Infrastructure.csproj"
+            "C:\\Users\\09659\\Downloads\\NewStart\\NewStart\\API\\IVY.Infrastructure\\IVY.Infrastructure.csproj": {
+              "projectPath": "C:\\Users\\09659\\Downloads\\NewStart\\NewStart\\API\\IVY.Infrastructure\\IVY.Infrastructure.csproj"
             }
           }
         }
@@ -10593,10 +10632,6 @@
       "net8.0": {
         "targetAlias": "net8.0",
         "dependencies": {
-          "AutoMapper.Extensions.Microsoft.DependencyInjection": {
-            "target": "Package",
-            "version": "[12.0.1, )"
-          },
           "DotNetEnv": {
             "target": "Package",
             "version": "[3.1.1, )"
@@ -10661,7 +10696,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.404/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.408/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

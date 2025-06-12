@@ -17,14 +17,19 @@ public class UnitOfWork : IUnitOfWork
         _db = db;
         Vnpay = new Vnpay();
         GHN = new GHN();
-        ProductColorFile = new ProductColorFileRepository(_db);
+        ProductSubColorFile = new ProductSubColorFileRepository(_db);
         Product =  new ProductRepository(_db);
+        Outfit=new OutfitRepository(_db);
         ProductCollection =  new ProductCollectionRepository(_db);
         Size =  new SizeRepository(_db);
         Category =  new CategoryRepository(_db);
         Color =  new ColorRepository(_db);
-        ProductColor =  new ProductColorRepository(_db);
-        ProductCategory =  new ProductCategoryRepository(_db);
+        Collection =  new CollectionRepository(_db);
+        ProductSubColor =  new ProductSubColorRepository(_db);
+        SubColor =  new SubColorRepository(_db);
+        ColorSubColor =  new ColorSubColorRepository(_db);
+        ProductSubCategory =  new ProductSubCategoryRepository(_db);
+        SubCategory =  new SubCategoryRepository(_db);
         
         
     }
@@ -33,8 +38,9 @@ public class UnitOfWork : IUnitOfWork
 
     // public IOrderItemRepository OrderItem {get;}
 
-    public IProductColorFileRepository ProductColorFile {get;}
+    public IProductSubColorFileRepository ProductSubColorFile {get;}
     public IProductRepository Product {get;}
+    public IOutfitRepository Outfit {get;}
     public IProductFavoriteRepository ProductFavorite { get; }
 
     public IProductCollectionRepository ProductCollection { get; }
@@ -44,10 +50,14 @@ public class UnitOfWork : IUnitOfWork
     public ICategoryRepository Category {get;}
 
     public IColorRepository Color {get;}
+    public ISubColorRepository SubColor {get;}
+    public IColorSubColorRepository ColorSubColor {get;}
+    public ICollectionRepository Collection {get;}
 
-    public IProductColorRepository ProductColor {get;}
+    public IProductSubColorRepository ProductSubColor {get;}
 
-    public IProductCategoryRepository ProductCategory {get;}
+    public IProductSubCategoryRepository ProductSubCategory {get;}
+    public ISubCategoryRepository SubCategory {get;}
     
 
 

@@ -1,6 +1,6 @@
 
 using IVY.Application.Interfaces.IRepository.Products;
-using IVY.Domain.Models;
+using IVY.Domain.Models.Products;
 using IVY.Infrastructure.Data;
 
 namespace IVY.Infrastructure.Repositories.ProductRepositories;

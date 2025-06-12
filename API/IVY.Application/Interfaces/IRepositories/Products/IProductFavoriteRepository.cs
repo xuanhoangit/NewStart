@@ -1,5 +1,5 @@
 
-using IVY.Domain.Models;
+using IVY.Domain.Models.Products;
 
 namespace IVY.Application.Interfaces.IRepository.Products;
 

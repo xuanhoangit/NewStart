@@ -35,7 +35,9 @@ public class GHN:IGHN
         if (response.IsSuccessStatusCode)
         {
             var result = JsonConvert.DeserializeObject<GHNResponse>(responseContent);
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
             Console.WriteLine($"Mã đơn hàng: {result.data.order_code}");
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
             return result;
         }
         return null;
@@ -114,7 +116,9 @@ public class GHN:IGHN
     if (response.IsSuccessStatusCode)
     {
         var result = JsonConvert.DeserializeObject<GHNResponse>(responseContent);
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
         Console.WriteLine($"Mã đơn hàng: {result.data.order_code}");
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
         return result;
     }
     return null;
