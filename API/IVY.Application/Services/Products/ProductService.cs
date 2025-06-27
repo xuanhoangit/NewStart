@@ -25,11 +25,56 @@ public class ProductService : IProductService
         _memoryCache = memoryCache;
         _mapper = mapper;
     }
+    public Result<ProductGetWithProductHomeShowDTO> Update(ProductFormUpdateDTO productFormUpdateDTO)
+    {
+        productFormUpdateDTO.Product__Name = StringValid.ConvertToValidString(productFormUpdateDTO.Product__Name);
+        //check subcategory is exist
+        var subCateIsExist = _uow.SubCategory.Find(x => productFormUpdateDTO.SubCategoryIds.Contains(x.SubCategory__Id));
 
+        if (subCateIsExist.Count() != productFormUpdateDTO.SubCategoryIds.Count())
+        {
+            return Result<ProductGetWithProductHomeShowDTO>.Failure(ResultStatus.BadRequest);
+        }
+        //check collection is exist
+        var collectionIsExist = _uow.Collection.Find(x => productFormUpdateDTO.CollectionIds.Contains(x.Collection__Id));
+        if (collectionIsExist.Count() != productFormUpdateDTO.CollectionIds.Count())
+        {
+            return Result<ProductGetWithProductHomeShowDTO>.Failure(ResultStatus.BadRequest);
+        }
+        // check product is exist
+        var product = _uow.Product.GetFirstOrDefault(x => x.Product__Name == productFormUpdateDTO.Product__Name && x.Product__Id !=productFormUpdateDTO.Product__Id
+        && x.Product__Status!=(int)ProductStatus.Deleted);
+        if (product != null)
+        {
+            return Result<ProductGetWithProductHomeShowDTO>.Failure(ResultStatus.Conflict);
+        }
+        var updateProduct = _uow.Product.Get(productFormUpdateDTO.Product__Id);
+        if (updateProduct != null&&updateProduct.Product__Status!=(int)ProductStatus.Deleted)
+        {
+            updateProduct.Product__Name = productFormUpdateDTO.Product__Name;
+            updateProduct.Product__SeasonId = productFormUpdateDTO.Product__SeasonId;
+            updateProduct.Product__CreateAt = DateTime.UtcNow;
+            updateProduct.Product__Status = (int)ProductStatus.Releasing;
+            // updateProduct.Product__Sold = 0;
+            
+            var result = _uow.Product.Update(updateProduct);
+            if (result)
+            {
+                AddProductSubCategoryAndProductCollection(
+                productFormUpdateDTO.CollectionIds, productFormUpdateDTO.SubCategoryIds, updateProduct.Product__Id);
+                var data = _mapper.Map<ProductGetWithProductHomeShowDTO>(updateProduct);
+                return Result<ProductGetWithProductHomeShowDTO>.Success(data);
+            }
+            return Result<ProductGetWithProductHomeShowDTO>.Failure(ResultStatus.InternalError);
+        }
+        
+        return Result<ProductGetWithProductHomeShowDTO>.Failure(ResultStatus.Conflict);
+       
+    }
     public List<dynamic> Search(string text)
     {
         text = StringValid.ConvertToValidString(text);
-        var result = _uow.Product.GetAll(x => x.Product__Name.Contains(text) && x.Product__Status != (int)ProductStatus.Deleted, "", 10)
+        var result = _uow.Product.GetAll(x => x.Product__Name.Contains(text) && x.Product__Status != (int)ProductStatus.Deleted)
         .Select(x => new
         {
             x.Product__Name,
@@ -133,7 +178,7 @@ public class ProductService : IProductService
         return new
         {
             products,
-            count = _uow.Product.GetAll().Count()
+            count = _uow.Product.GetAll(x=>x.Product__Status!=(int)ProductStatus.Deleted).Count()
         };
     }
     public async Task<dynamic> GetProducts(int Page)

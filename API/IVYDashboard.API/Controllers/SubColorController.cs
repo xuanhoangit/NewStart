@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace IVYDashboard.API.Controllers;
 [Route("api/mau")]
-public class SubColorController : BaseController<SubColor>
+public class SubColorController : BaseController
 {
     private readonly ISubColorService _scs;
     private readonly string ServerError="Có lỗi vừa xảy ra!";

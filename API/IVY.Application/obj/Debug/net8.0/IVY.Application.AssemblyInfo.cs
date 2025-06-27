@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("IVY.Application")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9d467474d47b0d314829e010b3152a7b438ec3fc")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+57468995c2e455efb7f0ad4170668a0f6132f7b8")]
 [assembly: System.Reflection.AssemblyProductAttribute("IVY.Application")]
 [assembly: System.Reflection.AssemblyTitleAttribute("IVY.Application")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

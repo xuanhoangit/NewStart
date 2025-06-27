@@ -10,6 +10,14 @@ public class ProductFormAddDTO
     public required int[] SubCategoryIds { get; set; }
     public required byte Product__SeasonId { get; set; }
 }
+public class ProductFormUpdateDTO
+{
+    public required int Product__Id { get; set; }
+    public required string Product__Name { get; set; }
+    public required int[] CollectionIds { get; set; }
+    public required int[] SubCategoryIds { get; set; }
+    public required byte Product__SeasonId { get; set; }
+}
 public class ProductGetDTO
 {
     public int Product__Id { get; set; }

@@ -1,14 +1,21 @@
 using System.Drawing;
 using System.Text;
 using DotNetEnv;
+using IVY.Application.DTOs;
 using IVY.Application.Interfaces.IRepository;
 using IVY.Application.Interfaces.IServices.Product;
+using IVY.Application.Interfaces.IServices.User;
+using IVY.Application.Interfaces.Users;
 using IVY.Application.Services;
 using IVY.Application.Services.Products;
 using IVY.Domain.Models.Users;
 using IVY.Infrastructure.Data;
+using IVY.Infrastructure.Repositories;
+using IVY.Infrastructure.Repositories.UserRepositories;
+using IVYDashboard.Controllers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using SneakerAPI.Infrastructure.Repositories;
@@ -26,7 +33,7 @@ builder.Services.AddCors(options =>
                       policy  =>
                       {
                           policy
-                            .WithOrigins(Environment.GetEnvironmentVariable("OriginHost"),"http://127.0.0.1:5500")
+                            .WithOrigins(Environment.GetEnvironmentVariable("OriginHost"))
                             .AllowAnyHeader()
                             .AllowAnyMethod()
                             .AllowCredentials(); // nếu bạn gửi cookie/token theo kiểu credentials
@@ -46,6 +53,7 @@ builder.Services.AddDbContext<IVYDbContext>(options =>
 );
 
 // builder.Services.AddScoped<IVnpay, Vnpay>();
+builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IOutfitService, OutfitService>();
 builder.Services.AddScoped<ISizeService, SizeService>();
@@ -55,10 +63,11 @@ builder.Services.AddScoped<ICollectionService, CollectionService>();
 builder.Services.AddScoped<ISubColorService, SubColorService>();
 builder.Services.AddScoped<IProductSubColorFileService, ProductSubColorFileService>();
 builder.Services.AddScoped<IProductSubColorService, ProductSubColorService>();
+builder.Services.AddScoped<IManageEmployersService, ManageEmployersService>();
 builder.Services.AddTransient<IUnitOfWork,UnitOfWork>();
+builder.Services.AddTransient<IEmailSender,EmailSender>();
 // builder.Services.AddTransient<IEmailSender,EmailSender>();
-// builder.Services.AddTransient<IEmailSender,EmailSender>();
-// builder.Services.AddTransient<IJwtService,JwtService>();
+builder.Services.AddTransient<IJwtService,JwtService>();
 builder.Services.AddIdentity<EmployeeIdentity, IdentityRole<Guid>>()
     .AddEntityFrameworkStores<IVYDbContext>()
     .AddDefaultTokenProviders();
@@ -68,7 +77,7 @@ var config=builder.Configuration;
 
 
 //SetConfigEmailSettings
-config["ConnectionStrings:SneakerAPIConnection"]=Environment.GetEnvironmentVariable("ConnectionString");
+config["ConnectionStrings:IVYConnection"]=Environment.GetEnvironmentVariable("ConnectionString");
 config["EmailSettings:SmtpServer"]=Environment.GetEnvironmentVariable("SmtpServer");
 config["EmailSettings:SmtpPort"]=Environment.GetEnvironmentVariable("SmtpPort");
 config["EmailSettings:SmtpUser"]=Environment.GetEnvironmentVariable("SmtpUser");
@@ -79,7 +88,7 @@ config["Vnpay:HashSecret"]=Environment.GetEnvironmentVariable("HashSecret");
 config["Vnpay:BaseUrl"]=Environment.GetEnvironmentVariable("BaseUrl");
 config["Vnpay:ReturnUrl"]=Environment.GetEnvironmentVariable("ReturnUrl");
 //SetDataEmailSettingModel
-// builder.Services.Configure<EmailSettings>(config.GetSection("EmailSettings"));
+builder.Services.Configure<EmailSettings>(config.GetSection("EmailSettings"));
 // builder.WebHost.ConfigureKestrel(serverOptions =>
 // {   
 //     serverOptions.ListenAnyIP(5001); // HTTP
@@ -96,27 +105,43 @@ builder.Services.AddAuthentication(
 }
 )   
 .AddJwtBearer(options =>
-{   
-    
+{
+
     // Cấu hình JWT Bearer Authentication
     options.TokenValidationParameters = new TokenValidationParameters
     {
-         ValidateIssuer = true,
-         ValidateAudience = true,
-         ValidateLifetime = true,
-         ValidateIssuerSigningKey = true,
-         
-          // Cấu hình RoleClaimType đúng với token của bạn
-        RoleClaimType = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
-         ValidIssuer = Environment.GetEnvironmentVariable("JWT__ValidIssuer"),
-         ValidAudience = Environment.GetEnvironmentVariable("JWT__ValidAudience"),
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
 
-         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Environment.GetEnvironmentVariable("JWT__Secret")))
+        // Cấu hình RoleClaimType đúng với token của bạn
+        RoleClaimType = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
+        ValidIssuer = Environment.GetEnvironmentVariable("JWT__ValidIssuer"),
+        ValidAudience = Environment.GetEnvironmentVariable("JWT__ValidAudience"),
+
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Environment.GetEnvironmentVariable("JWT__Secret")))
+    };
+    options.Events = new JwtBearerEvents
+    {
+         OnMessageReceived = context =>
+        {   
+            var accessToken = context.HttpContext.Request.Cookies["accessToken"];
+            var rfToken = context.HttpContext.Request.Cookies["refreshToken"];
+        Console.WriteLine("JWT Cookie token: " + accessToken);
+        Console.WriteLine("JWT Cookie ref: " + rfToken);
+            if (!string.IsNullOrEmpty(accessToken))
+            {
+                context.Token = accessToken;
+             
+            }
+            return Task.CompletedTask;
+        }
     };
 
 
 })
-.AddCookie()
+// .AddCookie()
 .AddGoogle(options =>
 {
     options.ClientId = Environment.GetEnvironmentVariable("CLIENT_ID");
@@ -130,12 +155,17 @@ builder.Services.AddControllers();
 // Đăng ký AutoMapper
 builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 builder.Services.AddHttpContextAccessor();
-
+builder.Services.AddHttpClient();
 builder.Services.AddMemoryCache(); // Thêm dịch vụ MemoryCache
 // builder.Services.AddSession(); // Thêm dịch vụ Session
 builder.Services.AddDistributedMemoryCache(); // Cần thiết cho Session
-
 var app = builder.Build();
+// using (var scope = app.Services.CreateScope())
+// {
+//     var services = scope.ServiceProvider;
+//     await DataController.InitializeAccount(services);
+//     System.Console.WriteLine("Tạo admin ");
+// }
 
 
 // Configure the HTTP request pipeline.

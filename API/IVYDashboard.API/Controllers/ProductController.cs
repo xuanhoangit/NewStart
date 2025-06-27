@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace IVYDashboard.API.Controllers;
 [Route("api/san-pham")]
-public class ProductController : BaseController<ProductGetWithProductHomeShowDTO>
+public class ProductController : BaseController
 {
     private readonly IProductService ps;
     private readonly string ServerError="Có lỗi vừa xảy ra!";
@@ -45,7 +45,7 @@ public class ProductController : BaseController<ProductGetWithProductHomeShowDTO
             {
                 return BadRequest("Id không hợp lệ");
             }
-            return ps.Remove(id) ? NoContent():StatusCode(500);
+            return ps.Remove(id) ? Ok():StatusCode(500);
             
         }
         catch (System.Exception)

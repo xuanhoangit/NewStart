@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace IVYDashboard.API.Controllers;
 
 [Route("api/mau-san-pham")]
-public class ProductSubColorController : BaseController<ProductSubColorGetHomeShowDTO>
+public class ProductSubColorController : BaseController
 {
     private readonly IProductSubColorService _psc;
         private readonly string ServerError="Có lỗi vừa xảy ra!";

@@ -21,7 +21,7 @@ public class Result<T>
     // public string? Message { get; set; }
     public ResultStatus Status { get; set; }
 
-    public static Result<T> Success(T data) => new() { Data = data, Status = ResultStatus.Success};
+    public static Result<T> Success(T data) => new() { Data=data,Status = ResultStatus.Success};
     public static Result<T> Created(T data) => new() { Data = data, Status = ResultStatus.Created };
     public static Result<T> Failure(ResultStatus status) => new() {  Status = status };
 }

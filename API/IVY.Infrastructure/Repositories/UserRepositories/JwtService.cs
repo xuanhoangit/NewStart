@@ -1,61 +1,79 @@
-// using System.IdentityModel.Tokens.Jwt;
-// using System.Security.Claims;
-// using System.Text;
-// using Microsoft.Extensions.Configuration;
-// using Microsoft.IdentityModel.Tokens;
-// using SneakerAPI.Core.DTOs;
-// using SneakerAPI.Core.Interfaces.UserInterfaces;
-// using SneakerAPI.Core.Models;
-// using SneakerAPI.Infrastructure.Data;
-// namespace SneakerAPI.Infrastructure.Repositories.UserRepositories;
-// public class JwtService : IJwtService
-//     {
-//     private readonly IConfiguration config;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
+using IVY.Application.DTOs;
+using IVY.Application.Interfaces.Users;
+using IVY.Domain.Models.Users;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 
-//     public JwtService(IConfiguration _config)
-//         {
-//         config = _config;
-//     }
-//         public object GenerateJwtToken(IdentityAccount account, IList<string> roles)
-//         {
-//             try
-//             {
+namespace IVY.Infrastructure.Repositories.UserRepositories;
+public class JwtService : IJwtService
+    {
+    private readonly IConfiguration config;
+
+    public JwtService(IConfiguration _config)
+        {
+        config = _config;
+    }
+        public string GenerateJwtToken(EmployeeIdentity emp, IList<string> roles,TimeSpan expiry,IHttpContextAccessor httpContextAccessor)
+        {
+            try
+            {
                 
-//             var jwtSettings = config.GetSection("JWT");
-//             System.Console.WriteLine("jwtSettings"+jwtSettings["ValidIssuer"]);
-//             System.Console.WriteLine("jwtSettings"+jwtSettings["ValidAudience"]);
-//             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings["Secret"]));
+            var jwtSettings = config.GetSection("JWT");
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings["Secret"]));
            
-//             var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+            var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
-//             var claims = new List<Claim>
-//             {
-//                 new Claim(JwtRegisteredClaimNames.Sub, account.Id.ToString()),//Sub sẽ đại diện cho Identifier 
-//                 new Claim(JwtRegisteredClaimNames.Email, account.Email),
-//                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
-//             };
-//             foreach (var role in roles)
-//             {
-//                 claims.Add(new Claim(ClaimTypes.Role, role));
-//             }
+            var claims = new List<Claim>
+            {
+                new Claim(JwtRegisteredClaimNames.Sub, emp.Id.ToString()),//Sub sẽ đại diện cho Identifier 
+                new Claim(JwtRegisteredClaimNames.Email, emp.Email),
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+            };
+            foreach (var role in roles)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, role));
+            }
 
-//             var token = new JwtSecurityToken(
-//                 issuer: jwtSettings["ValidIssuer"],
-//                 audience: jwtSettings["ValidAudience"],
-//                 claims: claims,
-//                 expires: DateTime.UtcNow.AddMinutes(15),
-//                 signingCredentials: credentials
-//             );
-//             return new TokenResponse{
-//                     AccessToken = new JwtSecurityTokenHandler().WriteToken(token),
-//                     RefreshToken= Guid.NewGuid().ToString()
-//                 };
-//              }
-//             catch (System.Exception)
-//             {
+            var token = new JwtSecurityToken(
+                issuer: jwtSettings["ValidIssuer"],
+                audience: jwtSettings["ValidAudience"],
+                claims: claims,
+                expires: DateTime.UtcNow.Add(expiry),
+                signingCredentials: credentials
+            );
+             var response = httpContextAccessor.HttpContext?.Response;
+            response.Cookies.Append("accessToken", new JwtSecurityTokenHandler().WriteToken(token), new CookieOptions
+            {
+                HttpOnly = true,
+                Secure = false,
+                SameSite = SameSiteMode.Lax,
+                Expires = DateTimeOffset.UtcNow.Add(expiry),
+                IsEssential = true,
+                // Domain=""
+            });
+
+            // 5. Ghi refreshToken
+            var refreshToken= Guid.NewGuid().ToString();
+            response.Cookies.Append("refreshToken", refreshToken, new CookieOptions
+            {
+                HttpOnly = true,
+                Secure = false,
+                SameSite = SameSiteMode.Lax,
+                Expires = DateTimeOffset.UtcNow.AddDays(30),
+                IsEssential = true
+            });
+            return refreshToken;
+     
+             }
+            catch (System.Exception)
+            {
                 
-//                 throw new Exception("An error occured while generating token");
-//             }
-//         }
+                throw new Exception("An error occured while generating token");
+            }
+        }
         
-// }
+}

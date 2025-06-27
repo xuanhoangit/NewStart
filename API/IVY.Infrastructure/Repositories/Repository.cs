@@ -56,12 +56,12 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity :class
             return _dbSet.ToList();
         }
 
-        public IEnumerable<TEntity> GetAll(Expression<Func<TEntity, bool>>? filter=null, string? includeProperties = null,byte limit=0)
+        public IEnumerable<TEntity> GetAll(Expression<Func<TEntity, bool>>? filter=null, string? includeProperties = null)
         {
             IQueryable<TEntity> query = _dbSet;
             if (filter != null) 
             {
-                query = query.Where(filter).Take(limit);
+                query = query.Where(filter);
             }
             if (includeProperties != null)
             {

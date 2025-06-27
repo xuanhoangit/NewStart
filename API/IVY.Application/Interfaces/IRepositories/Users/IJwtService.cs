@@ -1,8 +1,10 @@
-// namespace SneakerAPI.Core.Interfaces.UserInterfaces;
-// using SneakerAPI.Core.DTOs;
-// using SneakerAPI.Core.Models;
+using IVY.Domain.Models.Users;
+using Microsoft.AspNetCore.Http;
 
-// public interface IJwtService 
-// {
-//     object GenerateJwtToken(IdentityAccount account, IList<string> roles);
-// }
+namespace IVY.Application.Interfaces.Users;
+
+
+public interface IJwtService 
+{
+    string GenerateJwtToken(EmployeeIdentity emp, IList<string> roles,TimeSpan expiry,IHttpContextAccessor httpContextAccessor);
+}

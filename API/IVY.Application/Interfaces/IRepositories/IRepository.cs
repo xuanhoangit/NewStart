@@ -10,7 +10,7 @@ public interface IRepository<TEntity> where TEntity : class
         TEntity GetFirstOrDefault(Expression<Func<TEntity, bool>> filter, string? includeProperties = null, bool tracked = true);
         IEnumerable<TEntity> GetAll();
 
-        IEnumerable<TEntity> GetAll(Expression<Func<TEntity, bool>>? filter=null, string? includeProperties = null,byte limit=0);
+        IEnumerable<TEntity> GetAll(Expression<Func<TEntity, bool>>? filter=null, string? includeProperties = null);
 
         Task<IEnumerable<TEntity>> GetAllAsync();
         Task<IEnumerable<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>>? filter=null, string? includeProperties = null);

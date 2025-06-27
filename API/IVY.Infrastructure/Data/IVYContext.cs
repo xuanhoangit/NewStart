@@ -51,6 +51,9 @@ public class IVYDbContext : IdentityDbContext<EmployeeIdentity,IdentityRole<Guid
         .IsUnique();
         builder.Entity<ProductSubColor>().HasIndex(x => x.ProductSubColor__OutfitKey)
         .IsUnique();
+         builder.Entity<ProductSubColor>()
+        .Property(p => p.ProductSubColor__Price)
+        .HasPrecision(18, 0); // Không có phần thập phân
     }
     public DbSet<Customer> Customers { get; set; }
     public DbSet<Product> Products { get; set; }

@@ -280,22 +280,22 @@ namespace IVYDashboard.API.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Size__Id"));
 
-                    b.Property<int?>("Size__L")
+                    b.Property<int>("Size__L")
                         .HasColumnType("int");
 
-                    b.Property<int?>("Size__M")
+                    b.Property<int>("Size__M")
                         .HasColumnType("int");
 
                     b.Property<int>("Size__ProductSubColorId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("Size__S")
+                    b.Property<int>("Size__S")
                         .HasColumnType("int");
 
-                    b.Property<int?>("Size__XL")
+                    b.Property<int>("Size__XL")
                         .HasColumnType("int");
 
-                    b.Property<int?>("Size__XXl")
+                    b.Property<int>("Size__XXl")
                         .HasColumnType("int");
 
                     b.HasKey("Size__Id");
@@ -374,6 +374,10 @@ namespace IVYDashboard.API.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("Gender")
                         .HasColumnType("int");
 
@@ -428,6 +432,10 @@ namespace IVYDashboard.API.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("Gender")
                         .HasColumnType("int");
 
@@ -453,6 +461,12 @@ namespace IVYDashboard.API.Migrations
 
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
+
+                    b.Property<string>("RefreshToken")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("RefreshTokenExpiry")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");

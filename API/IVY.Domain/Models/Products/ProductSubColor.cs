@@ -9,6 +9,7 @@ public class ProductSubColor
 {
     [Key]
     public int ProductSubColor__Id { get; set; }
+    
     public required decimal ProductSubColor__Price { get; set; }
     public required string ProductSubColor__OutfitKey { get; set; } 
     public required byte ProductSubColor__Discount { get; set; }
