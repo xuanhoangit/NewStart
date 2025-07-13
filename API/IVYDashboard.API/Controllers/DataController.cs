@@ -10,7 +10,7 @@ public static class DataController
     {
         var userManager = serviceProvider.GetRequiredService<UserManager<EmployeeIdentity>>();
         var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole<Guid>>>();
-        string[] roleNames = { RolesName.Admin, RolesName.Customer, RolesName.SaleManager, RolesName.ProductManager, RolesName.Staff };
+        string[] roleNames = { RolesName.Admin, RolesName.Customer, RolesName.HumanSourceManager, RolesName.ProductManager, RolesName.Staff };
         foreach (var roleName in roleNames)
         {
             if (!await roleManager.RoleExistsAsync(roleName))

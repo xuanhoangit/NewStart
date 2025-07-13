@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("IVY.Domain")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+57468995c2e455efb7f0ad4170668a0f6132f7b8")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+70761c5ddef263561d7adbcad811799764684ed9")]
 [assembly: System.Reflection.AssemblyProductAttribute("IVY.Domain")]
 [assembly: System.Reflection.AssemblyTitleAttribute("IVY.Domain")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

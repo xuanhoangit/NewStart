@@ -78,6 +78,8 @@ public class ProductController : BaseController
         // var a=await ps.GetProductByFilter(filter);
         try
         {
+            if (!ModelState.IsValid)
+                return BadRequest();
             return Ok(await ps.GetProductByFilter(filter));
         }
         catch (System.Exception e)

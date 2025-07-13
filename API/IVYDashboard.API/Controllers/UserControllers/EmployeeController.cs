@@ -38,8 +38,18 @@ namespace IVYDashboard.API.Controllers.UserController
             var result = await emp.RefreshToken();
             return GetStatusReturn(result);
         }
+        [HttpPost("logout")]
+        public IActionResult Logout()
+        {
+            // Xóa cookie access và refresh token
+            Response.Cookies.Delete("accessToken");
+            Response.Cookies.Delete("refreshToken");
+
+            return Ok(new { message = "Logged out" });
+        }
+
         [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody]RegisterDto model)
+        public async Task<IActionResult> Register([FromForm]RegisterDto model)
         {   
             if(!ModelState.IsValid){
                 return BadRequest();
@@ -47,7 +57,7 @@ namespace IVYDashboard.API.Controllers.UserController
             var result = await emp.Register(model);
             if (result.Status == ResultStatus.Created)
             {
-                return CreatedAtAction(nameof(GetUser), result.Data.Id, result.Data);
+                return CreatedAtAction(nameof(GetUser), new {id=result.Data.Id}, result.Data);
             }
             return GetStatusReturn(result);
         }

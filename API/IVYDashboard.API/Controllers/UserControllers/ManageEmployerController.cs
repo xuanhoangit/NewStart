@@ -1,23 +1,42 @@
 using IVY.Application.DTOs;
+using IVY.Application.DTOs.Filters;
 using IVY.Application.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IVYDashboard.Controllers.UserControllers;
-[Route("api/manager-user")]
+[Route("api/employee")]
 public class ManageEmployerController : BaseController
 {
-    private readonly ManageEmployersService _mEmp;
+    private readonly IEmployeeManagerService _mEmp;
 
-    public ManageEmployerController(ManageEmployersService mEmp)
+    public ManageEmployerController(IEmployeeManagerService mEmp)
     {
         _mEmp = mEmp;
     }
-    [HttpPost("lay-off")]
-    public async Task<IActionResult> LayOffPersonnel(UserRole model)
+    [HttpPut("update-profile")]
+    public async Task<IActionResult> UpdateEmployeeInfomation([FromForm] RegisterDto model)
+    {
+        var result = await _mEmp.UpdateProfile(model);
+        return GetStatusReturn(result);
+    }
+    [HttpGet]
+    public async Task<IActionResult> GetEmployees(EmployeeFilter filter)
+    {
+        var result=await _mEmp.GetEmployees(filter);
+        return GetStatusReturn(result);
+    }
+    [HttpGet("no-access")]
+    public async Task<IActionResult> GetEmployeesNoAccess()
+    {
+        var result=await _mEmp.GetEmployeeNoRole();
+        return GetStatusReturn(result);
+    }
+    [HttpPost("revoke-access")]
+    public async Task<IActionResult> RevokeAccess([FromBody]UserRole model)
     {
         try
         {
-            var result = await _mEmp.LayOffPersonnel(model);
+            var result = await _mEmp.RevokeAccess(model);
             return GetStatusReturn(result);
         }
         catch (System.Exception)

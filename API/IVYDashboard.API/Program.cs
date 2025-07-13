@@ -63,7 +63,7 @@ builder.Services.AddScoped<ICollectionService, CollectionService>();
 builder.Services.AddScoped<ISubColorService, SubColorService>();
 builder.Services.AddScoped<IProductSubColorFileService, ProductSubColorFileService>();
 builder.Services.AddScoped<IProductSubColorService, ProductSubColorService>();
-builder.Services.AddScoped<IManageEmployersService, ManageEmployersService>();
+builder.Services.AddScoped<IEmployeeManagerService, EmployeeManagerService>();
 builder.Services.AddTransient<IUnitOfWork,UnitOfWork>();
 builder.Services.AddTransient<IEmailSender,EmailSender>();
 // builder.Services.AddTransient<IEmailSender,EmailSender>();
@@ -128,7 +128,9 @@ builder.Services.AddAuthentication(
         {   
             var accessToken = context.HttpContext.Request.Cookies["accessToken"];
             var rfToken = context.HttpContext.Request.Cookies["refreshToken"];
-        Console.WriteLine("JWT Cookie token: " + accessToken);
+            var datetimeRef = context.HttpContext.Request.Cookies["datetimeRef"];
+        // Console.WriteLine("JWT Cookie token: " + accessToken);
+        Console.WriteLine("Dảetine: " + datetimeRef);
         Console.WriteLine("JWT Cookie ref: " + rfToken);
             if (!string.IsNullOrEmpty(accessToken))
             {

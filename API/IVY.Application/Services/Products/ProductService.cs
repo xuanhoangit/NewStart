@@ -135,7 +135,7 @@ public class ProductService : IProductService
                 Product__Name = productFormAddDTO.Product__Name,
                 Product__SeasonId = productFormAddDTO.Product__SeasonId,
                 Product__CreateAt = DateTime.UtcNow,
-                Product__Status = (int)ProductStatus.Releasing,
+                Product__Status = (int)ProductStatus.NotComplete,
                 Product__Sold = 0,
             };
             var result = await _uow.Product.AddAsync(newProduct);
@@ -152,7 +152,7 @@ public class ProductService : IProductService
         // => active sản phẩm
         if (product.Product__Status == (int)ProductStatus.Deleted)
         {
-            product.Product__Status = (int)ProductStatus.Releasing;
+            product.Product__Status = (int)ProductStatus.NotComplete;
             product.Product__Sold = 0;
             product.Product__CreateAt = DateTime.UtcNow;
             product.Product__SeasonId = productFormAddDTO.Product__SeasonId;

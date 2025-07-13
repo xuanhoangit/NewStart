@@ -13,5 +13,6 @@ namespace IVY.Application.DTOs.Filters
         public int SubCategory__Id { get; set; }// lọc bằng SubCategories
         public List<string>? Sizes { get; set; }
         public int Page { get; set; } = 1;
+        public string RoleRequest { get; set; }
     }
 }

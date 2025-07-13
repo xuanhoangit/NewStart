@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
+using Microsoft.VisualBasic;
 using Newtonsoft.Json;
 
 namespace IVY.Application.Services;
@@ -28,6 +29,8 @@ public class EmployeeService : IEmployeeService
     private readonly IHttpContextAccessor _httpContextAccessor;
     private readonly IConfiguration config;
     private readonly IHttpClientFactory httpClientFactory;
+    private readonly TimeSpan accessTokenTimeExpire= TimeSpan.FromHours(1);
+    private readonly int refreshTokenTimeExpireDays= 30;
 
     public EmployeeService(UserManager<EmployeeIdentity> empManager,
                                  SignInManager<EmployeeIdentity> signInManager,
@@ -74,6 +77,7 @@ public async Task<CurrentUser>? GetCurrentUser()
     return new CurrentUser
     {
         Id = accountId,
+        Avatar=account.Avatar,
         Email = account.Email,
         UserName=account.UserName,
         Gender =account.Gender==0?"Nam":"Nữ",
@@ -89,7 +93,10 @@ public async Task<CurrentUser>? GetCurrentUser()
    
     public async Task<Result<dynamic>> RefreshToken( )
     {   
+        //  var refreshTokenFromCookie = "8dcddcd9-c54e-4e9f-a15e-38d9269b9ae9";
          var refreshTokenFromCookie = _httpContextAccessor.HttpContext?.Request?.Cookies["refreshToken"];
+        var refAccountTOken =await _empManager.FindByEmailAsync("0965972715a@gmail.com");
+        System.Console.WriteLine(refAccountTOken.RefreshToken);
         if (string.IsNullOrEmpty(refreshTokenFromCookie))
             return Result<dynamic>.Failure(ResultStatus.Unauthorized);
 
@@ -97,10 +104,38 @@ public async Task<CurrentUser>? GetCurrentUser()
         if (user == null || user.RefreshTokenExpiry < DateTime.UtcNow)
             return Result<dynamic>.Failure(ResultStatus.Unauthorized);
         var roles=await _empManager.GetRolesAsync(user);
-        user.RefreshToken = _jwtService.GenerateJwtToken(user, roles,TimeSpan.FromHours(1),_httpContextAccessor);
-        user.RefreshTokenExpiry = DateTime.UtcNow.AddDays(30);
-        await _empManager.UpdateAsync(user);
-    
+        
+        var accessToken= _jwtService.GenerateJwtToken(user, roles, accessTokenTimeExpire);
+        user.RefreshToken=Guid.NewGuid().ToString();
+        user.RefreshTokenExpiry = DateTime.UtcNow.AddDays(refreshTokenTimeExpireDays);
+        var result=await _empManager.UpdateAsync(user);
+        if (result.Succeeded)
+        {   
+
+             var response = _httpContextAccessor.HttpContext?.Response;
+            response.Cookies.Append("accessToken", accessToken, new CookieOptions
+            {
+                HttpOnly = true,
+                Secure = false,
+                SameSite = SameSiteMode.Lax,
+                Expires = DateTimeOffset.UtcNow.Add(accessTokenTimeExpire),
+                IsEssential = true,
+                // Domain=""
+            });
+            response.Cookies.Append("refreshToken", user.RefreshToken, new CookieOptions
+            {
+                HttpOnly = true,
+                Secure = false,
+                SameSite = SameSiteMode.Lax,
+                Expires = DateTimeOffset.UtcNow.Add(TimeSpan.FromDays(10)),
+                IsEssential = true,
+                // Domain=""
+            });
+            
+            
+            System.Console.WriteLine("retoken"+user.RefreshToken);
+            System.Console.WriteLine("lastupdate"+DateTime.UtcNow.ToString());
+        }
         return Result<dynamic>.Success("adad");
                    
         
@@ -126,6 +161,7 @@ public async Task<CurrentUser>? GetCurrentUser()
             {   
                 return Result<EmployeeIdentity>.Failure(ResultStatus.Conflict);
             }
+        var cloudinary = new CloudinaryService();
             var newAccount = new EmployeeIdentity
             {
                 UserName = model.Email,
@@ -134,8 +170,9 @@ public async Task<CurrentUser>? GetCurrentUser()
                 DateOfBirth = model.DateOfBirth,
                 FullName = model.FullName,
                 Department = model.Department,
-                Gender=model.Gender,
-                CreateDate=DateTime.Today
+                Gender = model.Gender,
+                CreateDate = DateTime.Today,
+                Avatar=await cloudinary.UploadImageAsync(model.Avatar,"avatar")
             };
 
             var result = await _empManager.CreateAsync(newAccount);
@@ -230,89 +267,58 @@ public async Task<CurrentUser>? GetCurrentUser()
 
             return Result<bool>.Success(true);
         }
-        public async Task<Result<object>> Login(LoginDto model)
-{
-   
+    public async Task<Result<object>> Login(LoginDto model)
+    {
 
-    // 1. Xác thực tài khoản
-    var account = await _empManager.FindByEmailAsync(model.Email);
-    if (account == null || !await _empManager.CheckPasswordAsync(account, model.Password))
-        return Result<object>.Failure(ResultStatus.Unauthorized);
+        var account = await _empManager.FindByEmailAsync(model.Email);
+        if (account == null || !await _empManager.CheckPasswordAsync(account, model.Password))
+            return Result<object>.Failure(ResultStatus.Unauthorized);
 
-    var roles = await _empManager.GetRolesAsync(account);
-    if (!roles.Any())
-        return Result<object>.Failure(ResultStatus.Unauthorized);
+        var roles = await _empManager.GetRolesAsync(account);
+        if (!roles.Any())
+            return Result<object>.Failure(ResultStatus.Unauthorized);
 
-    if (await _empManager.IsLockedOutAsync(account))
-        return Result<object>.Failure(ResultStatus.Forbidden);
+        if (await _empManager.IsLockedOutAsync(account))
+            return Result<object>.Failure(ResultStatus.Forbidden);
 
-    if (!await _empManager.IsEmailConfirmedAsync(account))
-        return Result<object>.Failure(ResultStatus.Forbidden);
+        if (!await _empManager.IsEmailConfirmedAsync(account))
+            return Result<object>.Failure(ResultStatus.Forbidden);
+            var accessToken= _jwtService.GenerateJwtToken(account, roles, accessTokenTimeExpire);
+            account.RefreshToken=Guid.NewGuid().ToString();
+            account.RefreshTokenExpiry = DateTime.UtcNow.AddDays(refreshTokenTimeExpireDays);
+            var result=await _empManager.UpdateAsync(account);
+            if (result.Succeeded)
+            {   
 
-    // 2. Tạo access token và refresh token
-    // var accessTokenExpiry = model.RememberMe ? TimeSpan.FromDays(7) : TimeSpan.FromHours(1);
-    account.RefreshToken = _jwtService.GenerateJwtToken(account, roles, TimeSpan.FromHours(1),_httpContextAccessor);
-    account.RefreshTokenExpiry = DateTime.UtcNow.AddDays(30);
-    await _empManager.UpdateAsync(account);
+                var response = _httpContextAccessor.HttpContext?.Response;
+                response.Cookies.Append("accessToken", accessToken, new CookieOptions
+                {
+                    HttpOnly = true,
+                    Secure = false,
+                    SameSite = SameSiteMode.Lax,
+                    Expires = DateTimeOffset.UtcNow.Add(accessTokenTimeExpire),
+                    IsEssential = true,
+                    // Domain=""
+                });
+                response.Cookies.Append("refreshToken", account.RefreshToken, new CookieOptions
+                {
+                    HttpOnly = true,
+                    Secure = false,
+                    SameSite = SameSiteMode.Lax,
+                    Expires = DateTimeOffset.UtcNow.Add(TimeSpan.FromDays(refreshTokenTimeExpireDays)),
+                    IsEssential = true,
+                    // Domain=""
+                });
+                
+                
+                System.Console.WriteLine("retoken"+account.RefreshToken);
+                System.Console.WriteLine("lastupdate"+DateTime.UtcNow.ToString());
+            }
+    
 
-   
+        return Result<object>.Success(new {message="Đang nhập thành công"});
+    }
 
-    return Result<object>.Success(new {message="Đang nhập thành công"});
-}
-
-        // Đăng nhập
-    // public async Task<Result<object>> Login(LoginDto model)
-    // {
-    //     var response = _httpContextAccessor.HttpContext?.Response;
-    //     var account = await _empManager.FindByEmailAsync(model.Email);
-    //     if (account == null || !await _empManager.CheckPasswordAsync(account, model.Password))
-    //         return Result<object>.Failure(ResultStatus.Unauthorized);
-
-    //     var roles=await _empManager.GetRolesAsync(account);
-    //     if(!roles.Any())
-    //         return Result<object>.Failure(ResultStatus.Unauthorized);
-    //     if (await _empManager.IsLockedOutAsync(account))
-    //     {
-    //          return Result<object>.Failure(ResultStatus.Forbidden);
-    //     }
-
-    //     if (!await _empManager.IsEmailConfirmedAsync(account))
-    //         return Result<object>.Failure(ResultStatus.Forbidden);
-
-    //     var result = await _signInManager.PasswordSignInAsync(account, model.Password, true, false);
-    //     if (result.Succeeded)
-    //     {  
-    //         System.Console.WriteLine("Success login"); 
-    //         var accessTokenExpiry = model.RememberMe ? TimeSpan.FromDays(7) : TimeSpan.FromHours(1);
-    //         var token = (TokenResponse)_jwtService.GenerateJwtToken(account,roles,accessTokenExpiry);
-
-    //         account.RefreshToken = Guid.NewGuid().ToString();
-    //         account.RefreshTokenExpiry = DateTime.UtcNow.AddDays(30);
-    //         await _empManager.UpdateAsync(account);
-
-    //             // Lưu access token vào cookie
-    //          response.Cookies.Append("accessToken", token.AccessToken, new CookieOptions
-    //         {
-    //             HttpOnly = true,
-    //             Secure = true,
-    //             SameSite = SameSiteMode.Strict,
-    //             Expires = DateTimeOffset.UtcNow.AddMinutes(15)
-    //         });
-
-    //         // Lưu refresh token
-    //         response.Cookies.Append("refreshToken", account.RefreshToken, new CookieOptions
-    //         {
-    //             HttpOnly = true,
-    //             Secure = true,
-    //             SameSite = SameSiteMode.Strict,
-    //             Expires = DateTimeOffset.UtcNow.AddDays(7)
-    //         });
-    //         token.RefreshToken = account.RefreshToken;
-    //         System.Console.WriteLine("hahaha");
-    //         return Result<object>.Success(new {success=true,message="Đăng nhập thành công"});
-    //     }
-    //     return Result<object>.Failure(ResultStatus.BadRequest);       
-    // }
 
     public async Task<Result<string>> ForgotPassword(ForgotPasswordDto model)
     {

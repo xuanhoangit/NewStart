@@ -30,6 +30,7 @@ public class UnitOfWork : IUnitOfWork
         ColorSubColor =  new ColorSubColorRepository(_db);
         ProductSubCategory =  new ProductSubCategoryRepository(_db);
         SubCategory =  new SubCategoryRepository(_db);
+        Employee =  new EmployerManageRepository(_db);
         
         
     }
@@ -66,7 +67,7 @@ public class UnitOfWork : IUnitOfWork
 
     public ICustomerRepository Customer {get;}
 
-    // public IStaffInfoRepository StaffInfo {get;}
+    public IEmployerManageRepository Employee {get;}
 
     // public IAddressRepository Address {get;}
 

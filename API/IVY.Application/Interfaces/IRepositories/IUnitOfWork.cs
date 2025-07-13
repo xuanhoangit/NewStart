@@ -29,7 +29,7 @@ public interface IUnitOfWork
     ISubCategoryRepository SubCategory { get; }
 
     ICustomerRepository Customer { get; }
-    // IStaffInfoRepository StaffInfo { get; }
+    IEmployerManageRepository Employee { get; }
     // IAddressRepository Address { get; }
     void Save();
 }

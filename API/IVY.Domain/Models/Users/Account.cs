@@ -1,5 +1,4 @@
 using System.ComponentModel.DataAnnotations;
-using IVY.Domain.Enums;
 using Microsoft.AspNetCore.Identity;
 
 namespace IVY.Domain.Models.Users;
@@ -12,7 +11,7 @@ public class EmployeeIdentity : IdentityUser<Guid>
     public string? RefreshToken { get; set; }
     public DateTime? RefreshTokenExpiry { get; set; }
     public string Department { get; set; }
-    public string Avatar {get; set; }
+    public string? Avatar {get; set; }
     public DateTime CreateDate { get; set; }
 }
 public class Customer
@@ -30,6 +29,6 @@ public class Customer
     public DateTime CreateDate { get; set; }
     public DateTime DateOfBirth { get; set; }
     public int Gender { get; set; }
-    public string Roles = RolesName.Customer;
+    public string Roles {get; set; }
     // Thêm các thông tin khác
 }

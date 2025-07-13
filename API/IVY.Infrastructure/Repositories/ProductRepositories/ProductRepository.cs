@@ -79,7 +79,13 @@ public class ProductRepository :Repository<Product> ,IProductRepository
         {
             query = query.Where(p => p.Product__Name.Contains(filter.SearchString));
         }
-
+    //     if (filter.RoleRequest == RolesName.Staff)
+    //     {
+    //         query = query.Where(p =>
+    //         p.Product__Status == (int)ProductStatus.Releasing &&
+    //         p.ProductSubColors.Any(x => x.ProductSubColor__Status == (int)ProductStatus.Releasing)
+    // );
+    //     }
         if (filter.Sizes != null && filter.Sizes.Any())
         {
             query = query.Where(p => p.ProductSubColors.Any(psc =>
@@ -169,7 +175,42 @@ public class ProductRepository :Repository<Product> ,IProductRepository
         Product__CreateAt = p.Product__CreateAt,
         // SubColorGetDTOs=p.ProductSubColors.Select(x=>x.SubColor)
         // .Select(x=>x).ToList(),
-        ProductSubColorGetHomeShowDTOs = p.ProductSubColors.Where(x=>x.ProductSubColor__Status!=(int)ProductStatus.Deleted)
+        ProductSubColorGetHomeShowDTOs = filter.RoleRequest!=RolesName.Staff?p.ProductSubColors.Where(x=>x.ProductSubColor__Status!=(int)ProductStatus.Deleted)
+            .OrderBy(psc => psc.ProductSubColor__CreateAt) // hoặc theo thời gian, hoặc theo Discount tùy ý
+            .Select(psc => new ProductSubColorGetHomeShowDTO
+            {
+                ProductSubColor__Id = psc.ProductSubColor__Id,
+                ProductSubColor__Price = psc.ProductSubColor__Price,
+                ProductSubColor__Discount = psc.ProductSubColor__Discount,
+                ProductSubColor__CreateAt = psc.ProductSubColor__CreateAt,
+                ProductSubColor__UpdateAt = psc.ProductSubColor__UpdateAt,
+                ProductSubColor__OutfitKey = psc.ProductSubColor__OutfitKey,
+                ProductSubColor__Status = psc.ProductSubColor__Status,
+                ProductSubColor__ProductId = psc.ProductSubColor__ProductId,
+                ProductSubColor__SubColorId=psc.ProductSubColor__SubColorId,
+                SizeDTO = new SizeDTO
+                {
+                    Size__Id = psc.Size.Size__Id,
+                    Size__M = psc.Size.Size__M,
+                    Size__L= psc.Size.Size__L,
+                    Size__S= psc.Size.Size__S,
+                    Size__XL= psc.Size.Size__XL,
+                    Size__XXl=psc.Size.Size__XXl
+                },
+                SubColorGetDTO =new SubColorGetDTO{
+                    SubColor__Id = psc.SubColor.SubColor__Id,
+                    SubColor__Name=psc.SubColor.SubColor__Name,
+                    SubColor__Image=psc.SubColor.SubColor__Image
+                },
+                ProductSubColorFileGetFileDTOs=psc.ProductSubColorFile.OrderBy(x=>x.ProductSubColorFile__Index).Select(s =>new ProductSubColorFileGetFileDTO{
+                    ProductSubColorFile__Id=s.ProductSubColorFile__Id,
+                    ProductSubColorFile__Index=s.ProductSubColorFile__Index,
+                    ProductSubColorFile__Name =s.ProductSubColorFile__Name,
+                    ProductSubColorFile__ProductColorId=s.ProductSubColorFile__Id
+                }).Take(2).ToList()
+               
+            })
+            .ToList():p.ProductSubColors.Where(x=>x.ProductSubColor__Status==(int)ProductStatus.Releasing)
             .OrderBy(psc => psc.ProductSubColor__CreateAt) // hoặc theo thời gian, hoặc theo Discount tùy ý
             .Select(psc => new ProductSubColorGetHomeShowDTO
             {

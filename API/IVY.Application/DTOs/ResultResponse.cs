@@ -20,10 +20,11 @@ public class Result<T>
     public T? Data { get; set; }
     // public string? Message { get; set; }
     public ResultStatus Status { get; set; }
+    public string? Error { get; set; }
 
-    public static Result<T> Success(T data) => new() { Data=data,Status = ResultStatus.Success};
+    public static Result<T> Success(T data) => new() { Data = data, Status = ResultStatus.Success };
     public static Result<T> Created(T data) => new() { Data = data, Status = ResultStatus.Created };
-    public static Result<T> Failure(ResultStatus status) => new() {  Status = status };
+    public static Result<T> Failure(ResultStatus status,string? error="") => new() {  Status = status ,Error=error};
 }
 
 

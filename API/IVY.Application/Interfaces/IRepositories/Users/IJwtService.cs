@@ -6,5 +6,5 @@ namespace IVY.Application.Interfaces.Users;
 
 public interface IJwtService 
 {
-    string GenerateJwtToken(EmployeeIdentity emp, IList<string> roles,TimeSpan expiry,IHttpContextAccessor httpContextAccessor);
+    string GenerateJwtToken(EmployeeIdentity emp, IList<string> roles,TimeSpan expiry);
 }

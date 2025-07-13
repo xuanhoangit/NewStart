@@ -9,6 +9,8 @@ namespace IVY.Domain.Enums
         Releasing = 1,
         [Description("Đã ngưng phát hành")]
         Discontinued = 2,
+        [Description("Chưa hoạn thiện")]
+        NotComplete = 3,
     }
     public enum Season
     {   

@@ -17,11 +17,11 @@ public class JwtService : IJwtService
         {
         config = _config;
     }
-        public string GenerateJwtToken(EmployeeIdentity emp, IList<string> roles,TimeSpan expiry,IHttpContextAccessor httpContextAccessor)
+        public string GenerateJwtToken(EmployeeIdentity emp, IList<string> roles,TimeSpan expiry)
         {
             try
             {
-                
+           
             var jwtSettings = config.GetSection("JWT");
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings["Secret"]));
            
@@ -30,7 +30,7 @@ public class JwtService : IJwtService
             var claims = new List<Claim>
             {
                 new Claim(JwtRegisteredClaimNames.Sub, emp.Id.ToString()),//Sub sẽ đại diện cho Identifier 
-                new Claim(JwtRegisteredClaimNames.Email, emp.Email),
+                // new Claim(JwtRegisteredClaimNames.Email, emp.Email),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
             foreach (var role in roles)
@@ -45,28 +45,11 @@ public class JwtService : IJwtService
                 expires: DateTime.UtcNow.Add(expiry),
                 signingCredentials: credentials
             );
-             var response = httpContextAccessor.HttpContext?.Response;
-            response.Cookies.Append("accessToken", new JwtSecurityTokenHandler().WriteToken(token), new CookieOptions
-            {
-                HttpOnly = true,
-                Secure = false,
-                SameSite = SameSiteMode.Lax,
-                Expires = DateTimeOffset.UtcNow.Add(expiry),
-                IsEssential = true,
-                // Domain=""
-            });
+            return new JwtSecurityTokenHandler().WriteToken(token);
+            
+           
 
-            // 5. Ghi refreshToken
-            var refreshToken= Guid.NewGuid().ToString();
-            response.Cookies.Append("refreshToken", refreshToken, new CookieOptions
-            {
-                HttpOnly = true,
-                Secure = false,
-                SameSite = SameSiteMode.Lax,
-                Expires = DateTimeOffset.UtcNow.AddDays(30),
-                IsEssential = true
-            });
-            return refreshToken;
+          
      
              }
             catch (System.Exception)

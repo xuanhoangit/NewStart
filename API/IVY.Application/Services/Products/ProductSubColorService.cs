@@ -66,7 +66,7 @@ public class ProductSubColorService : IProductSubColorService
                 ProductSubColor__Price = productSubColorDTO.ProductSubColor__Price,
                 ProductSubColor__Discount = productSubColorDTO.ProductSubColor__Discount,
                 ProductSubColor__CreateAt = DateTime.UtcNow,
-                ProductSubColor__Status = (int)ProductStatus.Discontinued,
+                ProductSubColor__Status = (int)ProductStatus.NotComplete,
                 ProductSubColor__OutfitKey = Guid.NewGuid().ToString()
 
             };
@@ -92,7 +92,7 @@ public class ProductSubColorService : IProductSubColorService
                 productSubColor.ProductSubColor__Price=productSubColorDTO.ProductSubColor__Price;
                 productSubColor.ProductSubColor__Discount=productSubColorDTO.ProductSubColor__Discount;
                 productSubColor.ProductSubColor__CreateAt=DateTime.UtcNow;
-                productSubColor.ProductSubColor__Status=(int)ProductStatus.Releasing;
+                productSubColor.ProductSubColor__Status=(int)ProductStatus.NotComplete;
                 productSubColor.ProductSubColor__OutfitKey = Guid.NewGuid().ToString();
                 
                 var result=_uow.ProductSubColor.Update(productSubColor);
