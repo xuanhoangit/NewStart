@@ -1,0 +1,26 @@
+.subcolors{
+    display: flex;
+    /* position: absolute; */
+    width: 100%;
+    font-size: 11px;
+    flex-wrap: wrap;
+    position: relative;
+}
+.subcolors li.selected {
+    border: 1px solid var(--clr-border-select);
+}
+.subcolors li{
+    text-align: center;
+    margin:0 5px ;
+    padding: 5px;
+    width: 10%;
+}
+.subcolors li:hover{
+    background-color: rgb(211, 227, 253);
+}
+.subcolors img{
+    width: 50px;
+    height: 35px;
+    object-fit: cover;
+        margin: 0 auto;
+}

@@ -1,0 +1,22 @@
+.size-update{
+  display: flex;
+  justify-content: space-between;
+}
+#form-update-size >.header{
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+#form-update-size >.header>.d-product{
+
+    padding:10px 30px;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.7);
+    width: fit-content;
+}
+#form-update-size >.header>.d-product .d-color div{
+    align-content: center;
+    display: flex;
+}

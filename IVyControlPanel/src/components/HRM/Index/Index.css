@@ -1,0 +1,138 @@
+
+
+
+.employee-page{
+    /* position: relative; */
+}
+.employee-functions{
+    display: flex;
+    padding: 10px 0;
+    box-shadow: 0px 4px 8px var(--clr-primary);
+}
+.employee-functions h2{
+    font-size: 24px;
+    color: var(--clr-white);
+    text-transform: uppercase;
+    margin-right: 30px;
+}
+.employee-functions button{
+    padding: 0 10px;
+    color: var(--clr-white);
+    margin-right: 20px;
+    /* height: 30px; */
+    background-color: var(--clr-primary);
+    font-size: 11px;
+    border-radius: 5px;
+    /* border: 1px solid var(--clr-white); */
+}
+.employee-functions :last-child:hover{
+    background-color: rgb(211, 227, 253);
+    color: var(--clr-primary);
+}
+.employee-content{
+    width: 100%;
+    border: 1px solid;
+}
+
+.employee-page .content{
+    z-index: 2;
+    top: 0px;
+    width: 100%;
+    right: 50%;
+    height: fit-content;
+    transform: translateX(50%);
+    background-color: var(--clr-primary);
+    color: var(--clr-white);
+    position: fixed;
+}
+.employee-page .content >div{
+    min-height: 100vh;
+    padding: 0 70px;
+    margin: auto;
+    border-radius: 0 0 7px 7px;
+    border: 1px solid var(--clr-border-select);
+    border-bottom: 3px solid var(--clr-border-select);
+    /* border-right: 1px solid var(--clr-border-select); */
+    box-sizing: border-box;
+}
+.employee-page .hide{
+    border: none;
+    outline: none;
+    right: 0;
+    height: 30px;
+    width: 35px;
+    background-color: rgb(211, 227, 253);
+    position: absolute;
+}
+.employee-page .hide:hover{
+    transition: 0.1s ease-in;
+    background-color: red;
+    color: var(--clr-white);
+}
+
+/* employee */
+.container-employees{
+    display: flex;
+    flex-wrap: wrap;
+}
+.container-employees>*{
+    width: 47% !important;
+    margin: auto;
+    /* overflow: hidden; */
+}
+.paging{
+    display: flex;
+    width: fit-content;
+    margin: auto;
+    margin-top: 20px;
+}
+.paging button{
+     color: var(--clr-white) !important;
+}
+.paging >div{
+    display: flex;
+}
+.paging .active{
+    background-color: var(--clr-white) !important;
+    color: var(--clr-primary) !important;
+}
+.paging .first, .paging .last{
+    
+    border-radius: 5px 1px;
+    margin: 0 40px !important;
+    text-align: center;
+    align-content: center;
+    background-color: var(--clr-primary);
+    height: 30px;
+    padding: 5px;
+    width: fit-content;
+    border: 1px solid rgb(211, 227, 253);
+}
+.paging .page{
+    width: 40px;
+    /* border-radius: 5px 1px; */
+    text-align: center;
+    align-content: center;
+    background-color: var(--clr-primary);
+    height: 30px !important;
+    border: 1px solid rgb(211, 227, 253);
+}
+.paging button:hover{
+    background-color: var(--clr-border-select);
+}
+
+
+
+.paging .prev,
+.paging  .next {
+    padding:0 7px !important;
+
+}
+.slick-slider{
+    display: block;
+}
+
+
+
+
+

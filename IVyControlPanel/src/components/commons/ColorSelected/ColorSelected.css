@@ -1,0 +1,25 @@
+.color_selected {
+    position: relative;
+    border: 1px solid var(--clr-border-select);
+    width: 23%;
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+.color_selected:hover{
+    background-color: rgba(253, 117, 117, 0.6);
+}
+.color_selected .color_img{
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+.color_selected > *{
+    font-size: 11px;
+    margin: 0 auto;
+    text-align: center;
+}
+.color_selected .remove{
+    position: absolute;
+    top: 0 ;
+    right: 0;
+}

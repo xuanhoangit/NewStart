@@ -1,0 +1,25 @@
+#form-add-product select{
+    font-weight: 500;
+    background-color: var(--clr-primary);
+    color: var(--clr-white);
+   }
+   #form-add-product input,#form-add-product select {
+     text-align: center; 
+     width: 100%;
+     padding: 8px;
+     margin-top: 5px;
+     margin-bottom: 15px;
+     height: 40px;
+     box-sizing: border-box;
+     border: 1px solid #ddd;
+     border-radius: 4px;
+     box-sizing: border-box;
+     font-family: Arial, sans-serif;
+     transition: border-color 0.3s ease;
+   }
+   
+   #form-add-product  input:focus {
+     border-color: #007bff;
+     outline: none;
+     box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
+   }

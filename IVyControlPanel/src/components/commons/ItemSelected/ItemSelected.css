@@ -1,0 +1,13 @@
+.item_selected{
+    border: 1px solid rgba(250, 49, 49, 0.6);
+    display: flex;
+    justify-content: space-between;
+    font-weight: 400;
+    font-size: 12px;
+    padding: 3px 5px;
+    background-color: var(--clr-white);
+    color: var(--clr-primary);
+}
+.item_selected:hover{
+    background-color: rgba(253, 117, 117, 0.6);
+}

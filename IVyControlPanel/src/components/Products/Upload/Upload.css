@@ -1,0 +1,148 @@
+#form-upload-file {
+    overflow-y: scroll;
+    max-height: 100vh;
+    padding: 20px;
+}
+#form-upload-file::-webkit-scrollbar {
+  width: 8px; /* Độ rộng thanh cuộn */
+  background-color: wheat; /* Màu nền thanh cuộn */
+}
+
+/* Phần "track" (nền của thanh cuộn) */
+#form-upload-file::-webkit-scrollbar-track {
+  background: var(--clr-white); /* Màu nền của track */
+}
+
+/* Phần "thumb" (tay nắm kéo của thanh cuộn) */
+#form-upload-file::-webkit-scrollbar-thumb {
+  background:rgb(163, 163, 163); /* Màu của thumb */
+  border-radius: 6px; /* Bo góc */
+}
+
+/* Khi hover vào thumb */
+#form-upload-file::-webkit-scrollbar-thumb:hover {
+  opacity: 0.5;
+  background: gray; /* Đổi màu khi hover */
+}
+#form-upload-file >.header{
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+#form-upload-file >.header>.d-product{
+
+    padding:10px 30px;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.7);
+    width: fit-content;
+}
+#form-upload-file >.header>.d-product .d-color div{
+    align-content: center;
+    display: flex;
+}
+
+#form-upload-file .btn-upload  div:hover{
+  text-decoration: underline;
+}
+
+
+
+
+  #form-upload-file  .header{
+    display: flex;
+  }
+  #form-upload-file  .header .selectFile{
+    margin: auto;
+  }
+  
+  .btn-rm-img{
+    position: absolute;top: 5px;right: 5px;background-color:rgb(156, 156, 155);
+      color: var(--clr-primary);
+      border: none;border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+      display: flex;
+  }
+  .btn-rm-img > i{
+    margin: auto;
+  }
+  .btn-rm-img:hover{
+    background-color: red;
+    color: var(--clr-white);
+  }
+  .preview{
+    display: flex;
+  }
+  .preview>.slide{
+    /* flex: 1.2; */
+    flex: 1;
+    /* border: 1px solid black; */
+  }
+  .preview>.list-image{
+    align-items: center;
+    flex: 1.5;
+    padding: 10px;
+    border-radius: 4px;
+    height: fit-content;
+    display: flex;
+    background-color:rgba(0, 0, 0, 0.7) ;
+    flex-wrap: wrap;
+    /* justify-content: space-between; */
+  }
+  .preview>.list-image > div{
+    position: relative;
+    width: 23%;
+    margin:0.5% 1%;
+    /* margin-bottom: 0.5%; */
+  }
+  .preview>.list-image > div img{
+    aspect-ratio: 1/1;
+    box-sizing: content-box;
+    height: 100%;
+    border: 1px solid;
+    object-fit: cover;
+    width: 100%;
+  }
+  #form-upload-file .file-action{
+
+  }
+  #form-upload-file .file-action >*{
+    padding: 5px 10px;
+    color: var(--clr-white);
+    width: fit-content;
+    margin-left: 10px;
+    border-radius: 4px;
+    border: 1px solid ;
+  }
+
+   #form-upload-file .file-action .disabled{
+    cursor: not-allowed !important;
+    background-color: gray !important; 
+    color: rgb(211, 227, 253) !important;
+  }
+
+
+  #form-upload-file .save{
+    background-color: green;
+  } 
+  #form-upload-file .remove{
+    background-color: red;
+  } 
+  #form-upload-file .remove:hover{
+    background-color: rgba(255, 0, 0, 0.507);
+  }
+  #form-upload-file .save:hover{
+    background-color: rgba(0, 128, 0, 0.507);
+  }
+  #form-upload-file .remove:active{
+    background-color: rgb(255, 81, 81);
+  }
+  #form-upload-file .save:active{
+    background-color: rgb(77, 250, 77);
+  }
+  .undo{
+    color: var(--clr-white);
+  }

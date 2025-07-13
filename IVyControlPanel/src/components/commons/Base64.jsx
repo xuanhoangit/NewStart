@@ -1,0 +1,1 @@
+export const base64="data:image/png;base64"

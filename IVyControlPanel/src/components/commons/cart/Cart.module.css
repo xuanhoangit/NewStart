@@ -1,0 +1,62 @@
+.addToCart{
+    right: 1px;
+    border-radius: 10px 0;
+    height: 30px;
+    width: 40px;
+    background: var(--background-button);
+    color: white;
+    position: relative;
+    box-sizing: border-box;
+}
+.addToCart:hover{
+    background: white;
+    border: 1px solid rgba(29, 29, 29, 0.973);
+    color: rgba(29, 29, 29, 0.973);
+}
+.addToCart div{
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+}
+
+.sizes{ 
+ 
+  border: 1px solid rgb(231, 231, 231);
+  position: absolute;
+  bottom: 0;
+  display: block;
+  /* left: 0px; */
+  bottom: 100%;
+  background-color: white;
+  max-width: 0px;
+  width: 0;
+  opacity: 0;
+  right: 0;
+  overflow: hidden;
+}
+.sizes.open{
+  transition: max-width 0.3s ease-in-out,opacity 0.5s ease-out;
+  opacity: 1;
+  width: 100px;
+  max-width: 500px;
+}
+.sizes li p{
+  line-height: 2;
+  padding:0 5px;
+  text-align: center;
+  font-size: 14px !important;
+}
+.sizes .active:hover{
+  background-color: var(--clr-border-select);
+}
+.sizes .outofstock{
+  color: rgb(1, 8, 19) !important;
+}
+.sizes .outofstock:hover{
+  background-color: var(--clr-border-select) !important;
+}
+.sizes li a{
+  font-weight: 550;
+  color: rgba(29, 29, 29, 0.973);
+}

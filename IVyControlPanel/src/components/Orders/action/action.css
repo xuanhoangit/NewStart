@@ -1,0 +1,213 @@
+.action *{
+    color:  var(--color-title) ;
+  }
+.cart_quantity-item{
+    background-color: var(--color-title);
+    color: white;
+    font-size: 10px;
+    height: 20px;
+    width: 20px;
+    padding: 0;
+    text-align: center;
+    top: 0;
+    right: 0;
+    box-sizing: border-box;
+    border-radius: 50%;
+}
+.action .cart .cart_quantity-item{
+    
+    position: absolute;
+    transform: translate(50%,-70%);
+}
+
+.cart-preview {
+    width: 350px;
+    border-radius: 3px;
+    background-color: white;
+    border: var(--border-bottom);
+    position: absolute;
+    height: fit-content;
+    right: -380px;
+    top:0;
+    opacity: 0;
+    transition: 0.2s ease-in-out;
+}
+.show{
+    right: 0;
+    opacity: 1;
+}
+.cart-preview .hide{
+    position: absolute;
+    right: 10px;
+}
+.cart-preview .list-items{
+    width: 100%;
+    height: 350px;
+    /* padding: 15px !important; */
+    overflow-y: scroll;
+}
+.list-items::-webkit-scrollbar{
+    width: 12px;
+    height: 20px;
+}
+/* Đặt màu và kiểu của thanh trượt (scroll thumb) */
+.list-items::-webkit-scrollbar-thumb {
+    background-color: #888;
+    /* Màu của thanh trượt */
+    border-radius: 10px;
+    /* Bo góc thanh trượt */
+    border: 2px solid #f1f1f1;
+    /* Đường viền thanh trượt */
+}
+
+/* Tùy chỉnh phần track (phần nền của thanh cuộn) */
+.list-items::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    /* Màu nền của phần track */
+}
+
+/* Khi hover vào thanh trượt */
+.list-items::-webkit-scrollbar-thumb:hover {
+    background: #555;
+    /* Đổi màu thanh trượt khi hover */
+}
+.cart-preview .cart-title{
+    display: flex;
+    height: 70px;
+    padding:0 15px;
+    /* border: 1px solid; */
+    align-items: center;
+    position: relative;
+    font-weight: 550;
+    font-size: 20px;
+}
+
+.cart-preview .item {
+        padding: 10px 0;
+        border-top: var(--border-bottom);
+        height: 100px;
+        display: flex;
+}
+
+.cart-preview .item .item-info{
+    font-size: 14px;
+    width: 100%;
+    text-align: start;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.cart-preview .item .item-info *{
+    padding: 0;
+}
+.cart-preview .item .item-info .key,.cart-preview .item .item-info .value{
+    font-size: 12px;
+}
+.cart-preview .item .item-info .item-color{
+    margin-right: 20px;
+}
+.cart-preview .item .item-info .key{
+    color: var(--text-para-color);
+    margin-right: 3px;
+}
+.cart-preview .item .item-info .value{
+    font-weight: 500;
+}
+.cart-preview .item .item-info .item-price{
+    font-weight: 550;
+    color: rgb(201, 0, 0);
+}
+.cart-preview .item .item-info .item-bottom{
+    display: flex;
+    justify-content: space-between;
+}
+   .item-action {
+       display: flex;
+       position: relative;
+       width: 90px;
+       height: 30px;
+       border-radius: 10px 0;
+       overflow: hidden;
+   }
+
+   .item-action input {
+        z-index: 3;
+       font-size: 12px;
+       height: 100%;
+       width: 100%;
+       text-align: center;
+       border: var(--border-bottom);
+   }
+
+   .item-action input:focus {
+       outline: none;
+   }
+
+   .item-action .remove,
+   .item-action .add {
+       position: absolute;
+       width: 30px;
+       top:0;
+       border-radius: 12px 0;
+       border: var(--border-bottom);
+       height: 100%;
+       box-sizing: border-box;
+       z-index: 2;
+       background-color: white;
+       text-align: center;
+       align-content: center;
+       user-select: none;
+       cursor: pointer;
+   }
+
+   .item-action .remove {
+       left: 0;
+   }
+
+   .item-action .add {
+       right: 0;
+   }
+
+   .cart-preview .total .value{
+    font-weight: bold;
+   }
+   .cart-preview .total .key{
+    font-size: 13px;
+   }
+
+   .cart-action{
+        box-sizing: border-box;
+        width: 100%;
+        width: 100%;
+        padding:0 10px;
+        box-sizing: border-box;
+   }
+   .cart-action .view-cart,.cart-action .login:hover{
+        background-color: var(--color-title);
+        color: white;
+   }
+   .cart-action .view-cart:hover{
+        background-color: white;
+        color: var(--color-title);
+   }
+   .cart-action .view-cart,.cart-action .login{
+        transition: 0.2s ease-in-out;
+        text-transform: uppercase;
+        font-weight: bold;
+        font-size: 14px;
+        width: 100%;
+        box-sizing: border-box;
+        padding: 13px;
+        border: 1px solid;
+        margin-bottom: 20px;
+        text-align: center;
+   }
+@media (max-width:600px){
+    .action a{
+        display: none;
+    }
+    .cart{
+    display: block !important;
+    }
+      
+}

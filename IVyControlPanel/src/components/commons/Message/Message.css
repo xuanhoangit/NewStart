@@ -1,0 +1,32 @@
+.msg{
+   position: fixed;
+   bottom: 0;
+   visibility: hidden;
+   max-height: 0px;
+   max-width: 100%;
+   width: 100%;
+   padding: 10px;
+   overflow: hidden;
+   text-align: center;
+   align-content: center;
+   font-size: 28px;
+   z-index: 1000;
+   font-weight: bold;
+   background-color: white;
+   text-transform: uppercase;
+   color: var(--clr-white);
+}
+.msg-popup{
+    transition:0.3s ease-in;
+    visibility: visible !important;
+    bottom: 0 !important;
+    max-height: 100% !important;
+    height: 100% !important;
+}
+.msg-popleft{
+    transition:0.3s ease-in-out;
+    visibility: hidden !important;
+    left: 0 !important;
+    width: 0;
+    max-width: 0 !important;
+}

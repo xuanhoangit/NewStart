@@ -1,0 +1,60 @@
+/* HTML: <div class="loader"></div> */
+.homeloader {
+  width: fit-content;
+  font-size: 80px;
+  line-height: 1.5;
+  font-family: system-ui,sans-serif;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #0000;
+  -webkit-text-stroke: 1px #000;
+  background:
+    radial-gradient(1.13em at 50% 1.6em,#1400cc 99%,#0000 101%) calc(50% - 1.6em) 0/3.2em 100% text,
+    radial-gradient(1.13em at 50% -0.8em,#0000 99%,#1400cc  101%) 50% .8em/3.2em 100% repeat-x  text;
+  animation: l9 2s linear infinite;
+}
+.homeloader:before {
+  content: "Loading";
+}
+@keyframes l9 {
+  to {background-position: calc(50% + 1.6em) 0,calc(50% + 3.2em) .8em}
+}
+
+
+
+
+/* HTML: <div class="loader"></div> */
+.sun-homeloader {
+  width:100%;
+  height: 40px;
+  /* background:
+    radial-gradient(circle 25px at top right, #ffd738 40%,#0000 ),
+    #4dbefa; */
+  position: relative;
+  overflow: hidden;
+}
+.sun-homeloader:before,
+.sun-homeloader:after{
+  content: "";
+  position: absolute;
+  top: 4px;
+  left: -40px;
+  width: 36px;
+  height: 20px;
+  --c: radial-gradient(farthest-side,#fff 96%,#0000);
+  background: 
+    var(--c) 100% 100% /30% 60%, 
+    var(--c) 70% 0 /50% 100%, 
+    var(--c) 0 100% /36% 68%, 
+    var(--c) 27% 18% /26% 40%,
+    linear-gradient(#fff 0 0) bottom/67% 58%;
+  background-repeat: no-repeat;
+  animation: l10 2s linear infinite;
+}
+.sun-homeloader:after {
+   top:15px;
+   --l:200%;
+}
+@keyframes l10{
+  100% {left:var(--l,105%)}
+}

@@ -1,0 +1,29 @@
+.popup-message {
+  display: flex;
+  align-items: center;
+  position: fixed;
+  top: 90%; /* 1/3 từ trên xuống */
+  right: 20px;
+  padding: 12px 20px;
+  background-color: #333;
+  color: white;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  z-index: 9999;
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
+}
+.popup-message >span{
+  font-size:24px;
+}
+.popup-message.success {
+  background-color: #28a745;
+}
+
+.popup-message.fail {
+  background-color: #dc3545;
+}
+
+.popup-message.fade-out {
+  opacity: 0;
+}

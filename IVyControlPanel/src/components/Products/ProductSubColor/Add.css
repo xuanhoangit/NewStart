@@ -1,0 +1,360 @@
+#form-add-color{
+
+}
+#form-add-color select{
+  color: var(--clr-white);
+  background-color: var(--clr-primary);
+}
+#form-add-color .selectFile:hover{
+  border: 1px solid black;
+  background-color: green;
+  transition: 0.3s ease-in-out;
+}
+
+#form-add-color input,#form-add-color select,.upload .selectFile{
+    text-align: center; 
+    width: 100%;
+    padding: 8px;
+    height: 40px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+    /* font-family: Arial, sans-serif; */
+    transition: border-color 0.3s ease;
+  }
+  #form-add-color .search-products{
+    width: 100%;
+    position: relative;
+  }
+  #form-add-color .container-subcolor{
+    z-index: 100;
+    position: absolute;
+    bottom: 0;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    
+    background-color: var(--clr-white);
+    color: var(--clr-primary);
+    border-radius: 5px;
+    border: 1px solid var(--clr-border-select);
+  }
+  .select-subcolor{
+     text-align: center; 
+    /* width: 200px; */
+    padding: 8px;
+    height: 40px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+
+    box-sizing: border-box;
+    /* font-family: Arial, sans-serif; */
+    transition: border-color 0.3s ease;
+  }
+  #form-add-color .container-subcolor .select{
+    padding: 3px 7px;
+    margin: 5px;
+    text-align: center;
+    background-color: rgb(211, 227, 253);
+    border: 1px solid var(--clr-border-select);
+  }
+  #form-add-color .container-subcolor .select:hover{
+    background-color: green;
+    color: var(--clr-white);
+    border: 1px solid var(--clr-white);
+  }
+  #form-add-color .container-subcolor > :first-child{
+    background-color: rgb(211, 227, 253);
+    width: 100%;
+    position: relative;
+    height: 30px;
+    margin-bottom: 5px;
+  }
+   #form-add-color .container-subcolor .hide-btn{
+    width: fit-content;
+    padding: 0 7px;
+    height: 100%;
+    right: 0;
+    text-align: center;
+    align-content: center;
+    cursor: pointer;
+    position: absolute;
+  }
+  #form-add-color .container-subcolor .hide-btn:hover{
+    background-color: rgba(252, 46, 46, 0.863) !important;
+    /* border: 1px solid var(--clr-white); */
+  }
+  .subcolor-selected{
+    margin-top: 5px;
+    height: auto;
+    width: fit-content;
+    padding: 5px 20px;
+    border: 1px solid rgb(211, 227, 253);
+    border-radius: 5px;
+    background-color: var(--clr-primary);
+    position: relative;
+  }
+.subcolor-selected :first-child{
+  margin: auto;
+  height: 20px;
+  margin-bottom: 5px;
+  width: 20px;
+  border-radius: 50%;
+  border: 1px solid rgb(211, 227, 253);
+}
+.subcolor-selected:last-child{
+  text-align: center;
+}
+  #form-add-color #search{
+    margin-bottom: 2px;
+   }
+   #form-add-color .search-products input{
+    height: 40px !important;
+    padding: 10px !important;
+    border-radius: 25px/25px  !important;
+   }
+   #form-add-color .search-result{
+    z-index: 10;
+    position: absolute;
+    border-radius: 4px;
+    width: 100%;
+    overflow: hidden;
+    height: fit-content;
+    border: 1px solid var(--clr-border-select);
+    background-color: var(--clr-primary);
+    color: var(--clr-white);
+  }
+
+  #form-add-color .search-result li{
+    font-size: 12px;
+    font-weight: 500;
+    padding: 5px;
+  }
+  #form-add-color .search-result li:hover{
+    background-color: var(--clr-select);
+    color: var(--clr-white);
+  }
+  #form-add-color .input_data{
+    display: flex;
+    justify-content: space-between;
+  }
+  #form-add-color .input_data > div{
+    width: 23%;
+  }
+  #form-add-color .product_name{
+    text-align: center;
+    height: 40px;
+    margin-bottom: 5px;
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+    margin-top: 5px;
+    border: var(--clr-border-select);
+    background-color: rgb(211, 227, 253);
+    color: var(--clr-primary);
+    text-align: center;
+    align-content: center;
+  }
+
+
+
+  #form-add-color .btn-select{
+    border-radius: 3px;
+    padding: 5px 20px;
+    background-color: var(--clr-white);
+    color: var(--clr-primary);
+    border:  1px solid wheat;
+    width: fit-content;
+    transition: 0.2s ease-in-out;
+  }
+  #form-add-color .btn-select:hover{
+    border:  1px solid var(--clr-white);
+    background-color: var(--clr-primary);
+    color: var(--clr-white);
+  }
+  #form-add-color .btn-select:active{
+    border:  1px solid var(--clr-white);
+    background-color: rgb(69, 253, 69);
+    color: var(--clr-white);
+  }
+  #form-add-color .showUL{
+    display: flex;
+    justify-content: space-between;
+  }
+  #form-add-color .display-color{
+    border: 1px solid white;
+    align-content: center;
+    width: 70%;
+    border-radius: 3px;
+  }
+  .btn-select{
+    
+  }
+  #form-add-color .container-color{
+    width: 100%;
+    max-height: 210px;
+    overflow: hidden;
+    z-index: 2;
+    right: 0;
+    top:0;
+    right: 0;
+    position: absolute;
+    overflow-y: scroll;
+    width: 300px;
+  }
+  #form-add-color .container-color::-webkit-scrollbar {
+    width: 8px; /* Độ rộng thanh cuộn */
+    background-color: wheat; /* Màu nền thanh cuộn */
+  }
+  
+  /* Phần "track" (nền của thanh cuộn) */
+  #form-add-color .container-color::-webkit-scrollbar-track {
+    background: var(--clr-white); /* Màu nền của track */
+  }
+  
+  /* Phần "thumb" (tay nắm kéo của thanh cuộn) */
+  #form-add-color .container-color::-webkit-scrollbar-thumb {
+    background:var(--clr-primary); /* Màu của thumb */
+    border-radius: 6px; /* Bo góc */
+  }
+  
+  /* Khi hover vào thumb */
+  #form-add-color .container-color::-webkit-scrollbar-thumb:hover {
+    opacity: 0.5;
+    background: green; /* Đổi màu khi hover */
+  }
+  /* #form-add-color .select{
+    background-color: var(--clr-white);
+    border: 1px solid var(--clr-white);
+    border-radius: 4px;
+    max-height: 0px;
+    opacity: 0;
+    overflow: hidden;
+  }
+  #form-add-color .select li{
+    width: 100%;
+    font-weight: 600;
+    -webkit-text-stroke: 0.5px rgb(252, 165, 5);
+    padding: 8px;
+    text-align: center;
+    height: 35px;
+    box-sizing: border-box;
+  }
+  #form-add-color .select li:hover{
+    border: 1px solid wheat;
+    opacity: 0.8;
+    transition: 0.3s ease-in-out;
+  } */
+
+  #form-add-color .container-add-image .add-image {
+    position: relative;
+    margin-right: 3px;
+    width: 20px;
+    height: 20px;
+    box-sizing: border-box;
+    overflow: hidden;
+    border-radius: 50%;
+  }
+  #form-add-color .container-add-image .add-image img{
+    height: 100%;
+    width: 100%;
+    /* position: absolute; */
+  }
+  #form-add-color  .container-add-image:hover .add-image>div{
+    transition: 0.2s ease-in-out;
+    visibility: visible;
+    /* border: 1px solid;
+    border-radius: 50%; */
+  }
+  #form-add-color .container-add-image:hover .add-image__action{
+    display: block;
+  }
+  #form-add-color .add-image > div{
+    color: black;
+    visibility: hidden;
+    font-size: 16px;
+    -webkit-text-stroke: 1px rgb(207, 179, 179);
+    position: absolute;
+    background-color: #f8f8f87c;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    text-align: center;
+    /* display: flex; */
+  }
+  #form-add-color .add-image__action{
+    width: 150px;
+    background-color: var(--clr-white);
+    border-radius: 4px;
+    color: var(--clr-primary);
+    position: absolute;
+    display: none;
+  }
+  #form-add-color .add-image__action:hover{
+    display: block;
+  }
+  #form-add-color .add-image__action:hover +.add-image>div{
+    display: block;
+  }
+  #form-add-color .add-image__action>*{
+    padding: 7px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.096);
+  }
+  #form-add-color .add-image__action i{
+    margin-right: 20px;
+  }
+  #form-add-color .add-image__action>*:hover{
+    background-color: rgba(0, 0, 0, 0.096);
+    /* color: var(--clr-white); */
+    /* background-color: rgb(30, 253, 179); */
+  }
+
+  /* #form-add-color .remove{
+    width: 400px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    background-color: var(--clr-white);
+    z-index: 1000;
+    padding: 20px;
+    text-align: center;
+    border-radius: 5px;
+    box-shadow:3px 3px rgba(2, 2, 2, 0.699);
+  }
+  #form-add-color .remove p{
+    height: 30px;
+    margin-bottom: 10px;
+  }
+  #form-add-color .remove button{
+    width: 50px;
+    height: 30px;
+    border-radius: 5px;
+    margin: 5px;
+  }
+  #form-add-color .remove button:hover{
+    
+  }
+  #form-add-color .remove .yes{
+    background-color: green;
+  }
+  #form-add-color .remove .yes:hover{
+    background-color: rgba(0, 128, 0, 0.582);
+  }
+  #form-add-color .remove .no{
+    background-color: rgb(145, 145, 145);
+    color: var(--clr-white);
+  }
+  #form-add-color .remove .no:hover{
+    background-color: red;
+  } */
+  
+
