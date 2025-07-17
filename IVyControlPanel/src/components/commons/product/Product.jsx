@@ -228,7 +228,7 @@ function Product({product,setAction,showPopup,setProducts}) {
                         {product.productSubColorGetHomeShowDTOs[index]?.productSubColor__Discount>0? <del className={productModule.originPrice}>{ ConvertToVND(product.productSubColorGetHomeShowDTOs[index]?.productSubColor__Price)}đ</del>:""
                         }
                     </div>
-                    {product.productSubColorGetHomeShowDTOs[index]?.sizeDTO!=undefined?<RequireRole allowedRoles={staff}><Cart size={product.productSubColorGetHomeShowDTOs[index]?.sizeDTO}></Cart></RequireRole>:""}
+                    {product.productSubColorGetHomeShowDTOs[index]?.sizeDTO!=undefined?<RequireRole allowedRoles={staff}><Cart product={{...product.productSubColorGetHomeShowDTOs[index],product__Name:product.product__Name}}></Cart></RequireRole>:""}
                 </div>:<div style={{bottom:0}} className={productModule.salef}>{nullValue}</div>
                 }
             </div>

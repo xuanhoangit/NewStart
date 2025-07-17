@@ -1,3 +1,4 @@
+using IVY.Domain.Models.Orders;
 using IVY.Domain.Models.Products;
 using IVY.Domain.Models.Users;
 using Microsoft.AspNetCore.Identity;
@@ -6,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace IVY.Infrastructure.Data;
 
-public class IVYDbContext : IdentityDbContext<EmployeeIdentity,IdentityRole<Guid>,Guid>
+public class IVYDbContext : IdentityDbContext<EmployeeIdentity, IdentityRole<Guid>, Guid>
 {
     public IVYDbContext(DbContextOptions<IVYDbContext> options) : base(options)
     {
@@ -51,9 +52,9 @@ public class IVYDbContext : IdentityDbContext<EmployeeIdentity,IdentityRole<Guid
         .IsUnique();
         builder.Entity<ProductSubColor>().HasIndex(x => x.ProductSubColor__OutfitKey)
         .IsUnique();
-         builder.Entity<ProductSubColor>()
-        .Property(p => p.ProductSubColor__Price)
-        .HasPrecision(18, 0); // Không có phần thập phân
+        builder.Entity<ProductSubColor>()
+       .Property(p => p.ProductSubColor__Price)
+       .HasPrecision(18, 0); // Không có phần thập phân
     }
     public DbSet<Customer> Customers { get; set; }
     public DbSet<Product> Products { get; set; }
@@ -70,5 +71,14 @@ public class IVYDbContext : IdentityDbContext<EmployeeIdentity,IdentityRole<Guid
     public DbSet<Color> Colors { get; set; }
     public DbSet<ProductSubColorFile> ProductSubColorFiles { get; set; }
     public DbSet<ProductFavorite> ProductFavorites { get; set; }
+
+    //Order
+    public DbSet<Order> Orders { get; set; }
+    public DbSet<CartItem> CartItems { get; set; }
+    public DbSet<OrderItem> OrderItems { get; set; }
+    public DbSet<Order> DashboardOrders { get; set; }
+    public DbSet<CartItem> DashboardCartItems { get; set; }
+    public DbSet<OrderItem> DashboardOrderItems { get; set; }
+
 
 }

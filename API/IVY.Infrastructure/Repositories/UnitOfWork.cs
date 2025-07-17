@@ -1,5 +1,6 @@
 using IVY.Application.Interfaces;
 using IVY.Application.Interfaces.IRepository;
+using IVY.Application.Interfaces.IRepository.Orders;
 using IVY.Application.Interfaces.IRepository.Products;
 using IVY.Application.Interfaces.Users;
 using IVY.Infrastructure.Data;
@@ -34,10 +35,10 @@ public class UnitOfWork : IUnitOfWork
         
         
     }
-    // public ICartItemRepository CartItem {get;}
-    // public IOrderRepository Order {get;}
+    public ICartItemRepository CartItem {get;}
+    public IOrderRepository Order {get;}
 
-    // public IOrderItemRepository OrderItem {get;}
+    public IOrderItemRepository OrderItem {get;}
 
     public IProductSubColorFileRepository ProductSubColorFile {get;}
     public IProductRepository Product {get;}

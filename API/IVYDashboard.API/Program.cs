@@ -3,10 +3,12 @@ using System.Text;
 using DotNetEnv;
 using IVY.Application.DTOs;
 using IVY.Application.Interfaces.IRepository;
+using IVY.Application.Interfaces.IServices.Order;
 using IVY.Application.Interfaces.IServices.Product;
 using IVY.Application.Interfaces.IServices.User;
 using IVY.Application.Interfaces.Users;
 using IVY.Application.Services;
+using IVY.Application.Services.Order;
 using IVY.Application.Services.Products;
 using IVY.Domain.Models.Users;
 using IVY.Infrastructure.Data;
@@ -64,6 +66,7 @@ builder.Services.AddScoped<ISubColorService, SubColorService>();
 builder.Services.AddScoped<IProductSubColorFileService, ProductSubColorFileService>();
 builder.Services.AddScoped<IProductSubColorService, ProductSubColorService>();
 builder.Services.AddScoped<IEmployeeManagerService, EmployeeManagerService>();
+builder.Services.AddScoped<ICartItemService, CartItemService>();
 builder.Services.AddTransient<IUnitOfWork,UnitOfWork>();
 builder.Services.AddTransient<IEmailSender,EmailSender>();
 // builder.Services.AddTransient<IEmailSender,EmailSender>();
@@ -129,9 +132,7 @@ builder.Services.AddAuthentication(
             var accessToken = context.HttpContext.Request.Cookies["accessToken"];
             var rfToken = context.HttpContext.Request.Cookies["refreshToken"];
             var datetimeRef = context.HttpContext.Request.Cookies["datetimeRef"];
-        // Console.WriteLine("JWT Cookie token: " + accessToken);
-        Console.WriteLine("Dảetine: " + datetimeRef);
-        Console.WriteLine("JWT Cookie ref: " + rfToken);
+      
             if (!string.IsNullOrEmpty(accessToken))
             {
                 context.Token = accessToken;

@@ -1,4 +1,5 @@
 
+using IVY.Application.Interfaces.IRepository.Orders;
 using IVY.Application.Interfaces.IRepository.Products;
 using IVY.Application.Interfaces.Users;
 
@@ -8,9 +9,9 @@ public interface IUnitOfWork
     //VNpay
     IVnpay Vnpay{get;}
     //IOrder
-    // ICartItemRepository CartItem { get; }
-    // IOrderRepository Order { get; }
-    // IOrderItemRepository OrderItem { get; }
+    ICartItemRepository CartItem { get; }
+    IOrderRepository Order { get; }
+    IOrderItemRepository OrderItem { get; }
     // //IProduct
     IProductSubColorFileRepository ProductSubColorFile { get; }
     IProductFavoriteRepository ProductFavorite { get; }

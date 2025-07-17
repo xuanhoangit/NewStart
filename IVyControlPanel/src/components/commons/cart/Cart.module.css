@@ -56,7 +56,7 @@
 .sizes .outofstock:hover{
   background-color: var(--clr-border-select) !important;
 }
-.sizes li a{
+.sizes li p{
   font-weight: 550;
   color: rgba(29, 29, 29, 0.973);
 }

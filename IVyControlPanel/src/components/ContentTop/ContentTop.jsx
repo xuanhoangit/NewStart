@@ -28,9 +28,9 @@ const ContentTop = () => {
         </div>
         <div className="content-top-btns" style={{display:"flex"}}>
 
-            <button onClick={()=>redirectTo()} type="button" className="search-btn content-top-btn">
+            <div onClick={()=>redirectTo()} type="button" className="search-btn content-top-btn">
                 <CartItem></CartItem>
-            </button>
+            </div>
             <button type="button" className="search-btn content-top-btn">
                 <img src={ iconsImgs.search } alt="" />
             </button>

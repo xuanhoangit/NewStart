@@ -15,6 +15,7 @@ import get from "../../GetData";
 import { hostNameHttp } from "../../commons/HostName";
 import Product from "../../commons/product/Product";
 import { useAuth } from "../../../AuthProvider";
+import { useCart } from "../../../context/CartProvider";
 
 const toQueryString = (obj, prefix = '') => {
     const query = [];
@@ -39,6 +40,7 @@ const toQueryString = (obj, prefix = '') => {
 
 export default function HomeProduct({ showPopup }){
     const {user}=useAuth();
+
     const [isShow,setIsShow]=useState(false);
     const [content,SetContent]=useState()
     const [products,setProducts]=useState([])

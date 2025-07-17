@@ -2,16 +2,20 @@
 import { useEffect, useRef, useState } from "react"
 
 import cart from "./Cart.module.css"
+import { useCart } from "../../../context/CartProvider"
 
 
-function Cart(size){
+function Cart({product}){
+    const size=product.sizeDTO;
+    // console.log(product)
     const sizeRef=useRef(null)
     const buttonRef=useRef(null)
+    const {addToCart}= useCart()
     // console.log(size)
     const [isShow,setIsShow]=useState(false)
     useEffect(() => {
         const handleClickOutside = (event) => {
-        if (buttonRef.current && !buttonRef.current.contains(event.target)) {
+        if (sizeRef.current && !sizeRef.current.contains(event.target)) {
             setIsShow(false); // Click ngoài => ẩn
         }
         };
@@ -33,32 +37,35 @@ function Cart(size){
     return (
         <div style={{position:"relative"}}>
         <ul className={cart.sizes} ref={sizeRef}>
-                {size.size.size__S>0?<li className={cart.active}>
-                    <a href=""><p>S</p></a>
+                {size.size__S>0?<li onClick={()=>addToCart({
+                    product__Name:product.product__Name,
+                    size:"S"
+                })} className={cart.active}>
+                    <p>S</p>
                 </li>:<li style={{color:"rgb(211, 227, 253)",cursor: "not-allowed"}} className="outofstock">
                     <p>S</p>
                 </li>
                 }
-                {size.size.size__M>0?<li className={cart.active}>
-                    <a href=""><p>M</p></a>
+                {size.size__M>0?<li className={cart.active} onClick={()=>alert("hehe")}>
+                    <p>M</p>
                 </li>:<li style={{color:"rgb(211, 227, 253)",cursor: "not-allowed"}} className="outofstock">
                     <p>M</p>
                 </li>
                 }
-                {size.size.size__L>0?<li className={cart.active}>
-                    <a href=""><p>L</p></a>
+                {size.size__L>0?<li className={cart.active}>
+                    <p>L</p>
                 </li>:<li style={{color:"rgb(211, 227, 253)",cursor: "not-allowed"}} className="outofstock">
                     <p>L</p>
                 </li>
                 }
-                {size.size.size__XL>0?<li className={cart.active}>
-                    <a href=""><p>XL</p></a>
+                {size.size__XL>0?<li className={cart.active}>
+                    <p>XL</p>
                 </li>:<li style={{color:"rgb(211, 227, 253)",cursor: "not-allowed"}} className="outofstock">
                     <p>XL</p>
                 </li>
                 }
-                {size.size.size__XXl>0?<li className={cart.active}>
-                    <a href=""><p>XXL</p></a>
+                {size.size__XXl>0?<li className={cart.active}>
+                    <p>XXL</p>
                 </li>:<li style={{color:"rgb(211, 227, 253)",cursor: "not-allowed"}} className="outofstock">
                     <p>XXL</p>
                 </li>

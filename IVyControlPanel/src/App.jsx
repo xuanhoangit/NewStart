@@ -10,7 +10,8 @@ import { v4 as uuidv4 } from 'uuid';
 import ResetPassword from './Login/ResetPassword';
 import { AuthProvider } from './AuthProvider';
 import ProtectedRoute from './ProtectRoute';
-// import Content from './layout/Content/Content';
+import { CartProvider} from './context/CartProvider';
+import CartItem from './components/Orders/CartItems/CartItem';
 const App=({showPopup})=>{
 
   return (
@@ -24,8 +25,7 @@ function AppRouter() {
   const getToken=()=>{
     return localStorage.getItem("token")||sessionStorage.getItem("token")
   }
-    const token = getToken();
-  // console.log("aa",token)
+
 
     const [popups, setPopups] = useState([]);
 
@@ -41,6 +41,7 @@ function AppRouter() {
 
   return (<>
           <AuthProvider>
+            <CartProvider>
           <Routes>
             <Route path="/login" element={<LoginForm showPopup={showPopup}/>} />
             <Route path="/forgot-password" element={<ForgotPassword showPopup={showPopup}/>} />
@@ -51,6 +52,7 @@ function AppRouter() {
               </ProtectedRoute>} />
                 
           </Routes>
+          </CartProvider>
           </AuthProvider>
            {popups.map((popup) => (
           <PopupMessage

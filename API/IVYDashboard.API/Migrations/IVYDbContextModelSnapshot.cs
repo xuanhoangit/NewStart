@@ -22,6 +22,107 @@ namespace IVYDashboard.API.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("IVY.Domain.Models.Orders.CartItem", b =>
+                {
+                    b.Property<int>("CartItem__Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CartItem__Id"));
+
+                    b.Property<Guid>("CartItem__CreatedByCustomerId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("CartItem__ProductSubColorId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CartItem__Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CartItem__Size")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("CartItem__Id");
+
+                    b.HasIndex("CartItem__CreatedByCustomerId");
+
+                    b.ToTable("CartItem");
+                });
+
+            modelBuilder.Entity("IVY.Domain.Models.Orders.Order", b =>
+                {
+                    b.Property<int>("Order__Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Order__Id"));
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OrderCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Order__AmountDue")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<Guid>("Order__CreatedByCustomerId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("Order__CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long>("Order__PaymentCode")
+                        .HasColumnType("bigint");
+
+                    b.Property<int>("Order__PaymentMethod")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Order__PaymentStatus")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Order__Status")
+                        .HasColumnType("int");
+
+                    b.HasKey("Order__Id");
+
+                    b.HasIndex("Order__CreatedByCustomerId");
+
+                    b.ToTable("Order");
+                });
+
+            modelBuilder.Entity("IVY.Domain.Models.Orders.OrderItem", b =>
+                {
+                    b.Property<int>("OrderItem__Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderItem__Id"));
+
+                    b.Property<int>("OrderItem__OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OrderItem__ProductSubColorId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OrderItem__Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<string>("OrderItem__Size")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("OrderItem__Id");
+
+                    b.HasIndex("OrderItem__OrderId");
+
+                    b.HasIndex("OrderItem__ProductSubColorId");
+
+                    b.ToTable("OrderItem");
+                });
+
             modelBuilder.Entity("IVY.Domain.Models.Products.Category", b =>
                 {
                     b.Property<int>("Category__Id")
@@ -398,6 +499,10 @@ namespace IVYDashboard.API.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Roles")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("UserName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -634,6 +739,47 @@ namespace IVYDashboard.API.Migrations
                     b.ToTable("UserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("IVY.Domain.Models.Orders.CartItem", b =>
+                {
+                    b.HasOne("IVY.Domain.Models.Users.Customer", "Customer")
+                        .WithMany()
+                        .HasForeignKey("CartItem__CreatedByCustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Customer");
+                });
+
+            modelBuilder.Entity("IVY.Domain.Models.Orders.Order", b =>
+                {
+                    b.HasOne("IVY.Domain.Models.Users.Customer", "Customer")
+                        .WithMany()
+                        .HasForeignKey("Order__CreatedByCustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Customer");
+                });
+
+            modelBuilder.Entity("IVY.Domain.Models.Orders.OrderItem", b =>
+                {
+                    b.HasOne("IVY.Domain.Models.Orders.Order", "Order")
+                        .WithMany("OrderItems")
+                        .HasForeignKey("OrderItem__OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("IVY.Domain.Models.Products.ProductSubColor", "ProductSubColor")
+                        .WithMany()
+                        .HasForeignKey("OrderItem__ProductSubColorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Order");
+
+                    b.Navigation("ProductSubColor");
+                });
+
             modelBuilder.Entity("IVY.Domain.Models.Products.ColorSubColor", b =>
                 {
                     b.HasOne("IVY.Domain.Models.Products.Color", "Color")
@@ -803,6 +949,11 @@ namespace IVYDashboard.API.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("IVY.Domain.Models.Orders.Order", b =>
+                {
+                    b.Navigation("OrderItems");
                 });
 
             modelBuilder.Entity("IVY.Domain.Models.Products.Category", b =>

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("IVY.Infrastructure")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+70761c5ddef263561d7adbcad811799764684ed9")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+cb0f00e8dd0e456d12d7907ae7ede2246b7d2979")]
 [assembly: System.Reflection.AssemblyProductAttribute("IVY.Infrastructure")]
 [assembly: System.Reflection.AssemblyTitleAttribute("IVY.Infrastructure")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

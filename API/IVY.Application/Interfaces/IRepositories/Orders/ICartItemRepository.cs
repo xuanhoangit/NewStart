@@ -1,10 +1,13 @@
-// using SneakerAPI.Core.DTOs;
-// using SneakerAPI.Core.Models.OrderEntities;
 
-// namespace SneakerAPI.Core.Interfaces.OrderInterfaces
-// {
-//     public interface ICartItemRepository : IRepository<CartItem>
-//     {
-//         Task<List<GetCartItemDTO>> GetCartItem(int account_id, int[]? cartItem_Ids=null);
-//     }
-// }
+
+using IVY.Application.DTOs;
+using IVY.Application.Interfaces.IRepository;
+using IVY.Domain.Models.Orders;
+
+namespace IVY.Application.Interfaces.IRepository.Orders
+{
+    public interface ICartItemRepository : IRepository<CartItem>
+    {
+        Task<List<GetCartItemDTO>> GetCartItem(string user_id);
+    }
+}
